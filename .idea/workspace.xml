@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1f796261-6ab6-4227-b142-8cb60fc14c02" name="Changes" comment="Changed controls, set up src folder, added our generator package">
-      <change beforePath="$PROJECT_DIR$/out/production/Mario-AI-Framework/PlayLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario-AI-Framework/PlayLevel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Mario-AI-Framework/engine/core/MarioGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario-AI-Framework/engine/core/MarioGame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PlayLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PlayLevel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/agents/human/Agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/agents/human/Agent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/core/MarioGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/core/MarioGame.java" afterDir="false" />
-    </list>
+    <list default="true" id="1f796261-6ab6-4227-b142-8cb60fc14c02" name="Changes" comment="Changed controls, set up src folder, added our generator package" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,6 +28,9 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunManager">
     <configuration name="PlayLevel" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -58,7 +55,7 @@
       <option name="presentableId" value="Default" />
       <updated>1636582342321</updated>
       <workItem from="1636582346724" duration="533000" />
-      <workItem from="1636582919932" duration="8475000" />
+      <workItem from="1636582919932" duration="9131000" />
     </task>
     <task id="LOCAL-00001" summary="Changed controls, set up src folder, added our generator package">
       <created>1636584523084</created>
