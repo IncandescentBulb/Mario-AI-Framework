@@ -42,7 +42,7 @@ public class LevelGenerator implements MarioLevelGenerator {
     static String CHUNK_3 =
             "----" + "\n" +
             "----" + "\n" +
-            "--e-" + "\n" +
+            "--g-" + "\n" +
             "XXXX";
 
     static String END =
