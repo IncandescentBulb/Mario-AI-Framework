@@ -59,6 +59,7 @@ public class MarioGame {
     private MarioWorld world = null;
     private boolean ended = false;
     private boolean exited = false;
+    public KeyAdapter waitFor = null;
 
     /**
      * Create a mario game to be played
@@ -82,11 +83,17 @@ public class MarioGame {
         }
         return 1000 / fps;
     }
+    public void lose(){
+        this.world.lose();
+    }
 
     private void setAgent(MarioAgent agent) {
         this.agent = agent;
         if (agent instanceof KeyAdapter) {
             this.render.addKeyListener((KeyAdapter) this.agent);
+        }
+        if(this.waitFor != null){
+            this.render.addKeyListener(this.waitFor);
         }
     }
     private class WaitForKey extends KeyAdapter{
@@ -107,12 +114,17 @@ public class MarioGame {
         private void toggleKey(int keyCode, boolean isPressed) {
             switch (keyCode) {
                 case KeyEvent.VK_ENTER:
+                    game.lose();
                     game.closeWindow();
                     ended = true;
                     break;
                 case KeyEvent.VK_ESCAPE:
+                    game.lose();
                     game.closeWindow();
                     exited = true;
+                    break;
+                case KeyEvent.VK_BACK_SPACE:
+                    game.lose();
                     break;
             }
         }
@@ -121,7 +133,7 @@ public class MarioGame {
         this.window.dispose();
     }
     public void addKey(){
-        this.render.addKeyListener(new WaitForKey(this));
+        this.waitFor = new WaitForKey(this);
     }
     public boolean getEnded(){
         return ended;
