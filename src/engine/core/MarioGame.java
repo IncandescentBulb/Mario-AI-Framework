@@ -1,5 +1,6 @@
 package engine.core;
 
+import java.awt.event.KeyEvent;
 import java.awt.image.VolatileImage;
 import java.util.ArrayList;
 import java.awt.*;
@@ -56,6 +57,8 @@ public class MarioGame {
     private MarioRender render = null;
     private MarioAgent agent = null;
     private MarioWorld world = null;
+    private boolean ended = false;
+    private boolean exited = false;
 
     /**
      * Create a mario game to be played
@@ -85,6 +88,46 @@ public class MarioGame {
         if (agent instanceof KeyAdapter) {
             this.render.addKeyListener((KeyAdapter) this.agent);
         }
+    }
+    private class WaitForKey extends KeyAdapter{
+        private MarioGame game;
+        public WaitForKey(MarioGame g){
+            game = g;
+        }
+        @Override
+        public void keyPressed(KeyEvent e) {
+            toggleKey(e.getKeyCode(), true);
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            toggleKey(e.getKeyCode(), false);
+        }
+
+        private void toggleKey(int keyCode, boolean isPressed) {
+            switch (keyCode) {
+                case KeyEvent.VK_ENTER:
+                    game.closeWindow();
+                    ended = true;
+                    break;
+                case KeyEvent.VK_ESCAPE:
+                    game.closeWindow();
+                    exited = true;
+                    break;
+            }
+        }
+    }
+    public void closeWindow(){
+        this.window.dispose();
+    }
+    public void addKey(){
+        this.render.addKeyListener(new WaitForKey(this));
+    }
+    public boolean getEnded(){
+        return ended;
+    }
+    public boolean getExited(){
+        return exited;
     }
 
     /**

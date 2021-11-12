@@ -32,8 +32,28 @@ public class PlayLevel {
     }
 
     public static void main(String[] args) {
-        MarioGame game = new MarioGame();
-        printResults(game.playGame(getLevel("./levels/original/lvl-1.txt"), 200, 0));
-        //printResults(game.runGame(new agents.robinBaumgarten.Agent(), getLevel("./levels/original/lvl-1.txt"), 20, 0, true));
+        boolean exited = false;
+        while(!exited){
+            MarioGame game = new MarioGame();
+            printResults(game.playGame(getLevel("./levels/original/lvl-1.txt"), 200, 0));
+            //printResults(game.runGame(new agents.robinBaumgarten.Agent(), getLevel("./levels/original/lvl-1.txt"), 20, 0, true));
+           // try {
+                game.addKey();
+                while(!game.getEnded()){
+                    if(game.getExited()){
+                        exited = true;
+                        break;
+                    }
+                }
+                if(!exited) {
+                    System.out.println("restarting");
+                }
+
+           /* } catch () {
+                e.printStackTrace();
+                System.out.println("KLjlkj");
+            }
+            System.out.println("flag2");*/
+        }
     }
 }
