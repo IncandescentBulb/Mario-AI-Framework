@@ -2,8 +2,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import engine.core.MarioGame;
-import engine.core.MarioResult;
+import engine.core.*;
 
 public class PlayLevel {
     public static void printResults(MarioResult result) {
@@ -32,13 +31,17 @@ public class PlayLevel {
     }
 
     public static void main(String[] args) {
+        //System.out.println("flag!");
         boolean exited = false;
         while(!exited){
             MarioGame game = new MarioGame();
-            printResults(game.playGame(getLevel("./levels/original/lvl-1.txt"), 200, 0));
+            game.addKey();
+            MarioLevelGenerator generator = new levelGenerators.FernandesMahanyMatava.LevelGenerator();
+            String level = generator.getGeneratedLevel(new MarioLevelModel(150, 16), new MarioTimer(5 * 60 * 60 * 1000));
+            //printResults(game.playGame(getLevel("./levels/original/lvl-1.txt"), 200, 0));
+            printResults(game.playGame(level, 200, 0));
             //printResults(game.runGame(new agents.robinBaumgarten.Agent(), getLevel("./levels/original/lvl-1.txt"), 20, 0, true));
            // try {
-                game.addKey();
                 while(!game.getEnded()){
                     if(game.getExited()){
                         exited = true;
@@ -46,7 +49,7 @@ public class PlayLevel {
                     }
                 }
                 if(!exited) {
-                    System.out.println("restarting");
+                    //System.out.println("restarting");
                 }
 
            /* } catch () {
