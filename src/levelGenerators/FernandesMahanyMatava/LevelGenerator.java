@@ -51,6 +51,195 @@ public class LevelGenerator implements MarioLevelGenerator {
             "-#--" + "\n" +
             "XXXX";
 
+    static String END_STAIRS =
+            "-------##-------" + "\n" +
+            "------###-------" + "\n" +
+            "-----####-------" + "\n" +
+            "----#####-------" + "\n" +
+            "---######-------" + "\n" +
+            "--#######-------" + "\n" +
+            "-########-------" + "\n" +
+            "#########-------" + "\n" +
+            "XXXXXXXXXXXXXXXX" + "\n" +
+            "XXXXXXXXXXXXXXXX";
+
+    static String PYRAMID_FLOOR =
+            "---#--#---" + "\n" +
+            "--##--##--" + "\n" +
+            "-###--###-" + "\n" +
+            "####--####" + "\n" +
+            "XXXXXXXXXX" + "\n" +
+            "XXXXXXXXXX";
+
+    static String PYRAMID_PIT =
+            "---##--#---" + "\n" +
+            "--###--##--" + "\n" +
+            "-####--###-" + "\n" +
+            "#####--####" + "\n" +
+            "XXXXX--XXXX" + "\n" +
+            "XXXXX--XXXX";
+
+    static String PIT =
+            "-------" + "\n" +
+            "XX---XX" + "\n" +
+            "XX---XX";
+
+    static String ENEMIES_1 =
+            "-r-g-g-" + "\n" +
+            "XXXXXXX" + "\n" +
+            "XXXXXXX";
+
+    static String FOUR_QUESTION_BLOCKS =
+            "-----@-----\n" +
+            "-----------\n" +
+            "-----------\n" +
+            "-----------\n" +
+            "--!--!--!--\n" +
+            "-----------\n" +
+            "-----------\n" +
+            "--k--------\n" +
+            "XXXXXXXXXXX\n" +
+            "XXXXXXXXXXX";
+
+    static String START_HIGH_SECTION =
+            "-------g----\n" +
+            "---SSSSSSSSS\n" +
+            "------------\n" +
+            "------------\n" +
+            "--g---------\n" +
+            "S@S---------\n" +
+            "------------\n" +
+            "------------\n" +
+            "------------\n" +
+            "XXXXXXXXX---\n" +
+            "XXXXXXXXX---";
+
+    static String HIGH_SECTION_ENEMY_PIT =
+            "--k---------\n" +
+            "SSSS-g--g-SS\n" +
+            "---SSSSSSSS-\n" +
+            "------------\n" +
+            "------------\n" +
+            "------------\n" +
+            "------------\n" +
+            "------------\n" +
+            "------------\n" +
+            "------------\n" +
+            "------------";
+
+    static String HIGH_SECTION_GAP =
+            "-----------g\n" +
+            "SS------SSSS\n" +
+            "------------\n" +
+            "------------\n" +
+            "------------\n" +
+            "------------\n" +
+            "------------\n" +
+            "------------\n" +
+            "------------\n" +
+            "------------\n" +
+            "------------";
+
+    static String HIGH_SECTION_END =
+            "------------\n" +
+            "SS----------\n" +
+            "----S-------\n" +
+            "------------\n" +
+            "------------\n" +
+            "-------CSS--\n" +
+            "------------\n" +
+            "------------\n" +
+            "-----------k\n" +
+            "---XXXXXXXXX\n" +
+            "---XXXXXXXXX";
+
+    static String BRICKS_1 =
+            "-SS@S-----\n" +
+            "----------\n" +
+            "----------\n" +
+            "------k-gg\n" +
+            "XXXXXXXXXX\n" +
+            "XXXXXXXXXX";
+
+    static String BRICKS_2 =
+            "------!---\n" +
+            "----------\n" +
+            "----------\n" +
+            "--!--SSS--\n" +
+            "----------\n" +
+            "----------\n" +
+            "---g--g---\n" +
+            "XXXXXXXXXX\n" +
+            "XXXXXXXXXX";
+
+    static String RAISED_START =
+            "-------\n" +
+            "-------\n" +
+            "-----SS\n" +
+            "-----SS\n" +
+            "XX---XX\n" +
+            "XX---XX";
+
+    static String RAISED_ENEMIES_1 =
+            "------\n" +
+            "-r-gg-\n" +
+            "SSSSSS\n" +
+            "SSSSSS\n" +
+            "XXXXXX\n" +
+            "XXXXXX";
+
+    static String RAISED_ENEMIES_2 =
+            "------\n" +
+            "-g--k-\n" +
+            "SSSSSS\n" +
+            "SSSSSS\n" +
+            "XXXXXX\n" +
+            "XXXXXX";
+
+    static String RAISED_BRICKS_1 =
+            "---@--\n" +
+            "------\n" +
+            "------\n" +
+            "------\n" +
+            "--SSS-\n" +
+            "------\n" +
+            "------\n" +
+            "------\n" +
+            "SSSSSS\n" +
+            "SSSSSS\n" +
+            "XXXXXX\n" +
+            "XXXXXX";
+
+    static String RAISED_BRICKS_2 =
+            "-----g----\n" +
+            "----SSS---\n" +
+            "----------\n" +
+            "----k-----\n" +
+            "--SCS-@---\n" +
+            "----------\n" +
+            "----------\n" +
+            "-------g--\n" +
+            "SSSSSSSSSS\n" +
+            "SSSSSSSSSS\n" +
+            "XXXXXXXXXX\n" +
+            "XXXXXXXXXX";
+
+    static String RAISED_PIT =
+            "------\n" +
+            "------\n" +
+            "SS---S\n" +
+            "SS---S\n" +
+            "XX---X\n" +
+            "XX---X";
+
+    static String RAISED_END =
+            "------\n" +
+            "-g----\n" +
+            "SSSS--\n" +
+            "SSSSS-\n" +
+            "XXXXXX\n" +
+            "XXXXXX";
+
     /**
      * Each chunk has a list of possible next chunks, and their weights.
      * The weight Floats are assumed to sum to 1.0 for any chunk.
@@ -83,6 +272,82 @@ public class LevelGenerator implements MarioLevelGenerator {
             put(CHUNK_2, 0.45f);
             //put(END, 0.1f);*/
         }});
+
+        // new
+
+        weight_maps.put(START, new HashMap<>(){{
+            put(START_HIGH_SECTION, 0.1f);
+            put(BRICKS_1, 0.1f);
+            put(BRICKS_2, 0.2f);
+            put(FOUR_QUESTION_BLOCKS, 0.2f);
+            put(PIT, 0.2f);
+            put(ENEMIES_1, 0.2f);
+        }});
+
+        weight_maps.put(BRICKS_1, new HashMap<>(){{
+            put(START_HIGH_SECTION, 0.1f);
+            put(BRICKS_2, 0.2f);
+            put(FOUR_QUESTION_BLOCKS, 0.2f);
+            put(PIT, 0.25f);
+            put(ENEMIES_1, 0.25f);
+        }});
+
+        weight_maps.put(BRICKS_2, new HashMap<>(){{
+            put(START_HIGH_SECTION, 0.1f);
+            put(BRICKS_1, 0.1f);
+            put(FOUR_QUESTION_BLOCKS, 0.2f);
+            put(PIT, 0.3f);
+            put(ENEMIES_1, 0.3f);
+        }});
+
+        weight_maps.put(FOUR_QUESTION_BLOCKS, new HashMap<>(){{
+            put(START_HIGH_SECTION, 0.1f);
+            put(BRICKS_1, 0.15f);
+            put(BRICKS_2, 0.25f);
+            put(PIT, 0.25f);
+            put(ENEMIES_1, 0.25f);
+        }});
+
+        weight_maps.put(PIT, new HashMap<>(){{
+            put(START_HIGH_SECTION, 0.1f);
+            put(BRICKS_1, 0.15f);
+            put(BRICKS_2, 0.25f);
+            put(FOUR_QUESTION_BLOCKS, 0.25f);
+            put(ENEMIES_1, 0.25f);
+        }});
+
+        weight_maps.put(ENEMIES_1, new HashMap<>(){{
+            put(START_HIGH_SECTION, 0.1f);
+            put(BRICKS_1, 0.15f);
+            put(BRICKS_2, 0.25f);
+            put(FOUR_QUESTION_BLOCKS, 0.25f);
+            put(PIT, 0.25f);
+        }});
+
+        weight_maps.put(START_HIGH_SECTION, new HashMap<>(){{
+            put(HIGH_SECTION_ENEMY_PIT, 0.4f);
+            put(HIGH_SECTION_GAP, 0.4f);
+            put(HIGH_SECTION_END, 0.2f);
+        }});
+
+        weight_maps.put(HIGH_SECTION_ENEMY_PIT, new HashMap<>(){{
+            put(HIGH_SECTION_GAP, 0.6f);
+            put(HIGH_SECTION_END, 0.4f);
+        }});
+
+        weight_maps.put(HIGH_SECTION_GAP, new HashMap<>(){{
+            put(HIGH_SECTION_ENEMY_PIT, 0.6f);
+            put(HIGH_SECTION_END, 0.4f);
+        }});
+
+        weight_maps.put(HIGH_SECTION_END, new HashMap<>(){{
+            put(BRICKS_1, 0.1f);
+            put(BRICKS_2, 0.2f);
+            put(FOUR_QUESTION_BLOCKS, 0.2f);
+            put(PIT, 0.2f);
+            put(ENEMIES_1, 0.2f);
+        }});
+
     }
 
     /**
