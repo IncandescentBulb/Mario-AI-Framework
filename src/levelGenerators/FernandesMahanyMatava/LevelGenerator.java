@@ -22,10 +22,10 @@ public class LevelGenerator implements MarioLevelGenerator {
             "----";
 
     static String START =
-            "----" + "\n" +
-            "----" + "\n" +
-            "----" + "\n" +
-            "XXXX";
+            "-------" + "\n" +
+            "--M----" + "\n" +
+            "XXXXXXX" + "\n" +
+            "XXXXXXX";
 
     static String CHUNK_1 =
             "----" + "\n" +
@@ -49,6 +49,7 @@ public class LevelGenerator implements MarioLevelGenerator {
             "----" + "\n" +
             "-F--" + "\n" +
             "-#--" + "\n" +
+            "XXXX" + "\n" +
             "XXXX";
 
     static String END_STAIRS =
@@ -107,7 +108,7 @@ public class LevelGenerator implements MarioLevelGenerator {
             "------------\n" +
             "------------\n" +
             "--g---------\n" +
-            "S@S---------\n" +
+            "S@S-----1---\n" +
             "------------\n" +
             "------------\n" +
             "------------\n" +
@@ -115,8 +116,8 @@ public class LevelGenerator implements MarioLevelGenerator {
             "XXXXXXXXX---";
 
     static String HIGH_SECTION_ENEMY_PIT =
-            "--k---------\n" +
-            "SSSS-g--g-SS\n" +
+            "--k--------r\n" +
+            "SSSS-g-ggkSS\n" +
             "---SSSSSSSS-\n" +
             "------------\n" +
             "------------\n" +
@@ -129,7 +130,7 @@ public class LevelGenerator implements MarioLevelGenerator {
 
     static String HIGH_SECTION_GAP =
             "-----------g\n" +
-            "SS------SSSS\n" +
+            "SS-----SSSSS\n" +
             "------------\n" +
             "------------\n" +
             "------------\n" +
@@ -276,11 +277,10 @@ public class LevelGenerator implements MarioLevelGenerator {
         // new
 
         weight_maps.put(START, new HashMap<>(){{
-            put(START_HIGH_SECTION, 0.1f);
-            put(BRICKS_1, 0.1f);
-            put(BRICKS_2, 0.2f);
-            put(FOUR_QUESTION_BLOCKS, 0.2f);
-            put(PIT, 0.2f);
+            put(BRICKS_1, 0.15f);
+            put(BRICKS_2, 0.25f);
+            put(FOUR_QUESTION_BLOCKS, 0.25f);
+            put(PIT, 0.25f);
             put(ENEMIES_1, 0.2f);
         }});
 
