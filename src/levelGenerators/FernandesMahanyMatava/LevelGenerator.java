@@ -27,22 +27,73 @@ public class LevelGenerator implements MarioLevelGenerator {
             "XXXXXXX" + "\n" +
             "XXXXXXX";
 
-    static String CHUNK_1 =
+    static String COIN_BOX=
+            "!S" + "\n" +
+            "--" + "\n" +
+            "--" + "\n" +
+            "XX" + "\n" +
+            "XX";
+
+    static String PIPE_1 =
             "----" + "\n" +
-            "-!S-" + "\n" +
             "----" + "\n" +
+            "-tt-" + "\n" +
+            "XXXX" + "\n" +
             "XXXX";
 
-    static String CHUNK_2 =
+    static String PIPE_2 =
             "----" + "\n" +
             "-tt-" + "\n" +
             "-tt-" + "\n" +
+            "XXXX" + "\n" +
             "XXXX";
 
-    static String CHUNK_3 =
+    static String PIPE_3 =
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "XXXX" + "\n" +
+            "XXXX";
+
+    static String PIPE_4 =
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "XXXX" + "\n" +
+            "XXXX";
+
+    static String PIPE_5 =
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "XXXX" + "\n" +
+            "XXXX";
+
+    static String PIPE_6 =
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "XXXX" + "\n" +
+            "XXXX";
+
+    static String PIPE_INBETWEEN_1 =
             "----" + "\n" +
             "----" + "\n" +
-            "--g-" + "\n" +
+            "-g-g" + "\n" +
+            "XXXX" + "\n" +
+            "XXXX";
+
+    static String PIPE_INBETWEEN_2 =
+            "----" + "\n" +
+            "----" + "\n" +
+            "-kg-" + "\n" +
+            "XXXX" + "\n" +
             "XXXX";
 
     static String END =
@@ -252,76 +303,101 @@ public class LevelGenerator implements MarioLevelGenerator {
         weight_maps = new HashMap<>();
 
         weight_maps.put(START, new HashMap<>(){{
-            put(CHUNK_1, 1.0f);
-        }});
-
-        // read: after CHUNK_1, there's a 50% change of getting CHUNK_2 or CHUNK_3
-        weight_maps.put(CHUNK_1, new HashMap<>(){{
-            put(CHUNK_2, 0.5f);
-            put(CHUNK_3, 0.5f);
-        }});
-
-        weight_maps.put(CHUNK_2, new HashMap<>(){{
-            put(CHUNK_1, 0.5f);
-            put(CHUNK_3, 0.5f);
-        }});
-
-        weight_maps.put(CHUNK_3, new HashMap<>(){{
-            put(CHUNK_1, 0.6f);
-            put(CHUNK_2, 0.4f);
-            /*put(CHUNK_1, 0.45f);
-            put(CHUNK_2, 0.45f);
-            //put(END, 0.1f);*/
-        }});
-
-        // new
-
-        weight_maps.put(START, new HashMap<>(){{
             put(BRICKS_1, 0.15f);
-            put(BRICKS_2, 0.25f);
+            put(BRICKS_2, 0.15f);
             put(FOUR_QUESTION_BLOCKS, 0.25f);
             put(PIT, 0.25f);
             put(ENEMIES_1, 0.2f);
+            put(PIPE_1, 0.1f);
         }});
 
         weight_maps.put(BRICKS_1, new HashMap<>(){{
             put(START_HIGH_SECTION, 0.1f);
-            put(BRICKS_2, 0.2f);
+            put(BRICKS_2, 0.1f);
             put(FOUR_QUESTION_BLOCKS, 0.2f);
             put(PIT, 0.25f);
             put(ENEMIES_1, 0.25f);
+            put(PIPE_1, 0.1f);
         }});
 
         weight_maps.put(BRICKS_2, new HashMap<>(){{
             put(START_HIGH_SECTION, 0.1f);
             put(BRICKS_1, 0.1f);
-            put(FOUR_QUESTION_BLOCKS, 0.2f);
+            put(FOUR_QUESTION_BLOCKS, 0.1f);
             put(PIT, 0.3f);
             put(ENEMIES_1, 0.3f);
+            put(PIPE_1, 0.1f);
         }});
 
         weight_maps.put(FOUR_QUESTION_BLOCKS, new HashMap<>(){{
             put(START_HIGH_SECTION, 0.1f);
             put(BRICKS_1, 0.15f);
-            put(BRICKS_2, 0.25f);
+            put(BRICKS_2, 0.15f);
             put(PIT, 0.25f);
             put(ENEMIES_1, 0.25f);
+            put(PIPE_1, 0.1f);
         }});
 
         weight_maps.put(PIT, new HashMap<>(){{
             put(START_HIGH_SECTION, 0.1f);
             put(BRICKS_1, 0.15f);
-            put(BRICKS_2, 0.25f);
+            put(BRICKS_2, 0.15f);
             put(FOUR_QUESTION_BLOCKS, 0.25f);
             put(ENEMIES_1, 0.25f);
+            put(PIPE_1, 0.1f);
         }});
 
         weight_maps.put(ENEMIES_1, new HashMap<>(){{
             put(START_HIGH_SECTION, 0.1f);
             put(BRICKS_1, 0.15f);
-            put(BRICKS_2, 0.25f);
+            put(BRICKS_2, 0.15f);
             put(FOUR_QUESTION_BLOCKS, 0.25f);
             put(PIT, 0.25f);
+            put(PIPE_1, 0.1f);
+        }});
+
+        weight_maps.put(PIPE_1, new HashMap<>(){{
+            put(PIPE_INBETWEEN_1, 0.5f);
+            put(PIPE_INBETWEEN_2, 0.5f);
+        }});
+
+        weight_maps.put(PIPE_2, new HashMap<>(){{
+            put(PIPE_INBETWEEN_1, 0.5f);
+            put(PIPE_INBETWEEN_2, 0.5f);
+        }});
+
+        weight_maps.put(PIPE_3, new HashMap<>(){{
+            put(PIPE_INBETWEEN_1, 0.5f);
+            put(PIPE_INBETWEEN_2, 0.5f);
+        }});
+
+        weight_maps.put(PIPE_4, new HashMap<>(){{
+            put(PIPE_INBETWEEN_1, 0.5f);
+            put(PIPE_INBETWEEN_2, 0.5f);
+        }});
+
+        weight_maps.put(PIPE_INBETWEEN_1, new HashMap<>(){{
+            put(PIPE_2, 0.25f);
+            put(PIPE_3, 0.25f);
+            put(PIPE_4, 0.20f);
+            put(START_HIGH_SECTION, 0.05f);
+            put(BRICKS_1, 0.05f);
+            put(BRICKS_2, 0.05f);
+            put(FOUR_QUESTION_BLOCKS, 0.05f);
+            put(PIT, 0.05f);
+            put(ENEMIES_1, 0.05f);
+        }});
+
+        weight_maps.put(PIPE_INBETWEEN_2, new HashMap<>(){{
+            put(PIPE_2, 0.25f);
+            put(PIPE_3, 0.25f);
+            put(PIPE_4, 0.20f);
+            put(START_HIGH_SECTION, 0.05f);
+            put(BRICKS_1, 0.05f);
+            put(BRICKS_2, 0.05f);
+            put(FOUR_QUESTION_BLOCKS, 0.05f);
+            put(PIT, 0.05f);
+            put(ENEMIES_1, 0.05f);
         }});
 
         weight_maps.put(START_HIGH_SECTION, new HashMap<>(){{
@@ -436,6 +512,8 @@ public class LevelGenerator implements MarioLevelGenerator {
                 x += w;
             }
         }
+
+        System.out.println(model.getMap().replace("\0", "-"));
 
         return model.getMap();
     }
