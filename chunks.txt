@@ -1,0 +1,46 @@
+    static String COIN_BOX=
+            "!S" + "\n" +
+            "--" + "\n" +
+            "--" + "\n" +
+            "XX";
+    static String PIPE_1 =
+            "----" + "\n" +
+            "----" + "\n" +
+            "-tt-" + "\n" +
+            "XXXX";
+    static String PIPE_2 =
+            "----" + "\n" +
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "XXXX";
+    static String PIPE_3 =
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "XXXX";
+    static String PIPE_4 =
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "XXXX";
+    static String PIPE_5 =
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "XXXX";
+    static String PIPE_6 =
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "-tt-" + "\n" +
+            "XXXX";
+    static String HOLE =
+            "----" + "\n" +
+            "----" + "\n" +
+            "----" + "\n" +
+            "----";
