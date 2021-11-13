@@ -358,6 +358,8 @@ public class LevelGenerator implements MarioLevelGenerator {
     /**
      * Add a random chunk to the chunks List, based on the weight map of the previous chunk
      */
+
+
     void nextChunk() {
         // random [0.0, 1.0)
         float value = (float)Math.random();
