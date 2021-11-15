@@ -308,7 +308,7 @@ public class LevelGenerator implements MarioLevelGenerator {
             put(FOUR_QUESTION_BLOCKS, 0.25f);
             put(PIT, 0.25f);
             put(ENEMIES_1, 0.2f);
-            put(PIPE_1, 0.1f);
+            put(PIPE_2, 0.1f);
         }});
 
         weight_maps.put(BRICKS_1, new HashMap<>(){{
@@ -317,7 +317,7 @@ public class LevelGenerator implements MarioLevelGenerator {
             put(FOUR_QUESTION_BLOCKS, 0.2f);
             put(PIT, 0.25f);
             put(ENEMIES_1, 0.25f);
-            put(PIPE_1, 0.1f);
+            put(PIPE_2, 0.1f);
         }});
 
         weight_maps.put(BRICKS_2, new HashMap<>(){{
@@ -326,7 +326,7 @@ public class LevelGenerator implements MarioLevelGenerator {
             put(FOUR_QUESTION_BLOCKS, 0.1f);
             put(PIT, 0.3f);
             put(ENEMIES_1, 0.3f);
-            put(PIPE_1, 0.1f);
+            put(PIPE_2, 0.1f);
         }});
 
         weight_maps.put(FOUR_QUESTION_BLOCKS, new HashMap<>(){{
@@ -335,7 +335,7 @@ public class LevelGenerator implements MarioLevelGenerator {
             put(BRICKS_2, 0.15f);
             put(PIT, 0.25f);
             put(ENEMIES_1, 0.25f);
-            put(PIPE_1, 0.1f);
+            put(PIPE_2, 0.1f);
         }});
 
         weight_maps.put(PIT, new HashMap<>(){{
@@ -344,7 +344,7 @@ public class LevelGenerator implements MarioLevelGenerator {
             put(BRICKS_2, 0.15f);
             put(FOUR_QUESTION_BLOCKS, 0.25f);
             put(ENEMIES_1, 0.25f);
-            put(PIPE_1, 0.1f);
+            put(PIPE_2, 0.1f);
         }});
 
         weight_maps.put(ENEMIES_1, new HashMap<>(){{
@@ -353,12 +353,7 @@ public class LevelGenerator implements MarioLevelGenerator {
             put(BRICKS_2, 0.15f);
             put(FOUR_QUESTION_BLOCKS, 0.25f);
             put(PIT, 0.25f);
-            put(PIPE_1, 0.1f);
-        }});
-
-        weight_maps.put(PIPE_1, new HashMap<>(){{
-            put(PIPE_INBETWEEN_1, 0.5f);
-            put(PIPE_INBETWEEN_2, 0.5f);
+            put(PIPE_2, 0.1f);
         }});
 
         weight_maps.put(PIPE_2, new HashMap<>(){{
@@ -376,10 +371,15 @@ public class LevelGenerator implements MarioLevelGenerator {
             put(PIPE_INBETWEEN_2, 0.5f);
         }});
 
+        weight_maps.put(PIPE_5, new HashMap<>(){{
+            put(PIPE_INBETWEEN_1, 0.5f);
+            put(PIPE_INBETWEEN_2, 0.5f);
+        }});
+
         weight_maps.put(PIPE_INBETWEEN_1, new HashMap<>(){{
-            put(PIPE_2, 0.25f);
             put(PIPE_3, 0.25f);
-            put(PIPE_4, 0.20f);
+            put(PIPE_4, 0.25f);
+            put(PIPE_5, 0.20f);
             put(START_HIGH_SECTION, 0.05f);
             put(BRICKS_1, 0.05f);
             put(BRICKS_2, 0.05f);
@@ -389,9 +389,9 @@ public class LevelGenerator implements MarioLevelGenerator {
         }});
 
         weight_maps.put(PIPE_INBETWEEN_2, new HashMap<>(){{
-            put(PIPE_2, 0.25f);
             put(PIPE_3, 0.25f);
-            put(PIPE_4, 0.20f);
+            put(PIPE_4, 0.25f);
+            put(PIPE_5, 0.20f);
             put(START_HIGH_SECTION, 0.05f);
             put(BRICKS_1, 0.05f);
             put(BRICKS_2, 0.05f);
@@ -434,8 +434,6 @@ public class LevelGenerator implements MarioLevelGenerator {
     /**
      * Add a random chunk to the chunks List, based on the weight map of the previous chunk
      */
-
-
     void nextChunk() {
         // random [0.0, 1.0)
         float value = (float)Math.random();
