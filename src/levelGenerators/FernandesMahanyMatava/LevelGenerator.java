@@ -104,16 +104,16 @@ public class LevelGenerator implements MarioLevelGenerator {
             "XXXX";
 
     static String END_STAIRS =
-            "-------##-------" + "\n" +
-            "------###-------" + "\n" +
-            "-----####-------" + "\n" +
-            "----#####-------" + "\n" +
-            "---######-------" + "\n" +
-            "--#######-------" + "\n" +
-            "-########-------" + "\n" +
-            "#########-------" + "\n" +
-            "XXXXXXXXXXXXXXXX" + "\n" +
-            "XXXXXXXXXXXXXXXX";
+            "--------##-------" + "\n" +
+            "-------###-------" + "\n" +
+            "------####-------" + "\n" +
+            "-----#####-------" + "\n" +
+            "----######-------" + "\n" +
+            "---#######-------" + "\n" +
+            "--########-------" + "\n" +
+            "-#########-------" + "\n" +
+            "XXXXXXXXXXXXXXXXX" + "\n" +
+            "XXXXXXXXXXXXXXXXX";
 
     static String PYRAMID_FLOOR =
             "---#--#---" + "\n" +
@@ -475,13 +475,14 @@ public class LevelGenerator implements MarioLevelGenerator {
         // TODO: maybe should add a length limit here in case it gets stuck in a loop
         int chunkCount = 0;
         //TODO: do total lengths of chunks, in tiles, rather than number of chunks
-        float minSize = 20;
-        float maxSize = 100;
+        float minSize = 15;
+        float maxSize = 18;
         while(!this.chunks.get(this.chunks.size() - 1).equals(END)) {
             float value = (float)Math.random();
             float endWeight = (chunkCount-minSize)/(maxSize-minSize);
-            System.out.println("endweight: " + endWeight + ", rand value: " + value);
+//            System.out.println("endweight: " + endWeight + ", rand value: " + value);
             if(endWeight > value){
+                this.chunks.add(END_STAIRS);
                 this.chunks.add(END);
             }else {
                 nextChunk();
