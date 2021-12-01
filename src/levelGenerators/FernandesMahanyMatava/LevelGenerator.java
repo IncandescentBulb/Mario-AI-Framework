@@ -477,9 +477,13 @@ public class LevelGenerator implements MarioLevelGenerator {
         //TODO: do total lengths of chunks, in tiles, rather than number of chunks
         float minSize = 15;
         float maxSize = 18;
+        float minSizeTiles = 75;
+        float maxSizeTiles = 140;
+        int map_length = 0;
         while(!this.chunks.get(this.chunks.size() - 1).equals(END)) {
             float value = (float)Math.random();
-            float endWeight = (chunkCount-minSize)/(maxSize-minSize);
+            //float endWeight = (chunkCount-minSize)/(maxSize-minSize);
+            float endWeight = (map_length-minSizeTiles)/(maxSizeTiles-minSizeTiles);
 //            System.out.println("endweight: " + endWeight + ", rand value: " + value);
             if(endWeight > value){
                 this.chunks.add(END_STAIRS);
@@ -488,6 +492,7 @@ public class LevelGenerator implements MarioLevelGenerator {
                 nextChunk();
             }
             chunkCount++;
+            map_length+= this.chunks.get(this.chunks.size() - 1).split("\n")[0].length();
         }
 
         // build the level out of the chunks
