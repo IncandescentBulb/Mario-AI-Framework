@@ -90,7 +90,7 @@ public class LevelGenerator implements MarioLevelGenerator {
             int w = ChunkReg.CHUNKS.get(ch).tiles.split("\n")[0].length();
             int h = ChunkReg.CHUNKS.get(ch).tiles.split("\n").length;
 
-            if (x + w > model.getWidth()) {
+            if (x + w >= model.getWidth()-4) {
                 // if the level is too long, change this chunk to an END and stop building more chunks
                 ch = "END";
                 w = ChunkReg.CHUNKS.get(ch).tiles.split("\n")[0].length();
