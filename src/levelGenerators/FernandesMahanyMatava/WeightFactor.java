@@ -16,6 +16,7 @@ class PrevChunkFactor implements WeightFactor {
     @Override
     public float getWeight(LevelGenerator generator) {
         float w;
+        //TODO: add conditions that are checked to modify weights
         if(generator.chunks.size() < 2){
             w= 0.0f;
         } else if(generator.chunks.get(generator.chunks.size() - 2).equals(this.chunk)){
