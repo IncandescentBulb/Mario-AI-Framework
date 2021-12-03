@@ -51,7 +51,7 @@ public class Chunk {
      * Shortcut for adding a static weight
      */
     void addWeight(String chunk, float weight) {
-        this.addWeight(chunk, (prevChunks) -> weight);
+        this.addWeight(chunk, (_generator) -> weight);
     }
 
     int getWidth() {
