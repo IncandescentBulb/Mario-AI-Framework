@@ -37,9 +37,9 @@ public class PlayLevel {
             MarioGame game = new MarioGame();
             game.addKey();
             //Milestone 2
-            //MarioLevelGenerator generator = new levelGenerators.FernandesMahanyMatava.LevelGenerator();
+            MarioLevelGenerator generator = new levelGenerators.FernandesMahanyMatava.LevelGenerator();
             //Milestone 1
-            MarioLevelGenerator generator = new levelGenerators.FernandesMahanyMatava1.LevelGenerator();
+            //MarioLevelGenerator generator = new levelGenerators.FernandesMahanyMatava1.LevelGenerator();
 
             String level = generator.getGeneratedLevel(new MarioLevelModel(150, 16), new MarioTimer(5 * 60 * 60 * 1000));
 
