@@ -8,7 +8,8 @@ public class ChunkReg {
     /// old unused Chunk data
     /// each row is assumed to be the same width
     /// chunks are aligned by the bottom row if they have different heights
-    /// no two chunks can be exactly the same
+
+    // TODO: add these into the new Chunk system
 
     static String BLANK =
             "----" + "\n" +
@@ -131,12 +132,16 @@ public class ChunkReg {
 
         CHUNKS = new HashMap<>();
 
+        // TODO: might want to move all the addWeights after the HashMap is filled otherwise we won't be able to use tags here in the future
+        //       (or if we make this deferred somehow it could allow the layout to stay the same?)git
+
         CHUNKS.put("START", new Chunk("""
             -------
             --M----
             XXXXXXX
             XXXXXXX
             """));
+        // TODO: this repetition is kind of gross, could refactor addWeight to be chainable
         CHUNKS.get("START").addWeight("BRICKS_1", 0.75f);
         CHUNKS.get("START").addWeight("BRICKS_2", 0.75f);
         CHUNKS.get("START").addWeight("FOUR_QUESTION_BLOCKS", 1.25f);

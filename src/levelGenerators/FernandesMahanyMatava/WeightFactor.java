@@ -43,7 +43,11 @@ class SpecificChunkFactor implements WeightFactor {
     String chunkName; //name of the chunk to look for
     float weight; // weight to apply if chunk is found
     String within; // specifies a set of chunks to look at
-    static List<String> withinOptions = Arrays.asList("Prior", "All", "FirstX", "LastX"); // TODO: this should be an enum
+
+    // TODO: this should be an enum, it would remove the need to check for valid input most of the time
+    //       though I feel like it would just be better to have these be separate classes anyway, they
+    //           already have separate constructors.
+    static List<String> withinOptions = Arrays.asList("Prior", "All", "FirstX", "LastX");
     /* Valid values for within
     * Prior: The last chunk currently in the level
     * All: All chunks within the level
