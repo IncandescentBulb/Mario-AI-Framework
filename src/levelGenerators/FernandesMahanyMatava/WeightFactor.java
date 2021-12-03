@@ -36,11 +36,14 @@ class PrevChunkFactor implements WeightFactor {
     }
 }
 
-class SpecificChunkFactor implements WeightFactor { // Applies a weight if a specific chunk is within a certain section of the level
+/**
+ * Applies a weight if a specific chunk is within a certain section of the level
+ */
+class SpecificChunkFactor implements WeightFactor {
     String chunkName; //name of the chunk to look for
     float weight; // weight to apply if chunk is found
     String within; // specifies a set of chunks to look at
-    static List<String> withinOptions = Arrays.asList("Prior", "All", "FirstX", "LastX");
+    static List<String> withinOptions = Arrays.asList("Prior", "All", "FirstX", "LastX"); // TODO: this should be an enum
     /* Valid values for within
     * Prior: The last chunk currently in the level
     * All: All chunks within the level

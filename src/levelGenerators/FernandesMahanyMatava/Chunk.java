@@ -18,6 +18,11 @@ public class Chunk {
         this.weights = new HashMap<>();
     }
 
+    /**
+     * Recalculates the weights for this Chunk's possible next Chunks
+     * @param generator The generator to use for context
+     * @return Map of chunk keys to weights
+     */
     HashMap<String, Float> calculateWeights(LevelGenerator generator) {
         HashMap<String, Float> calc = new HashMap<>();
 
@@ -29,6 +34,11 @@ public class Chunk {
         return calc;
     }
 
+    /**
+     * Add a WeightFactor for a possible next chunk
+     * @param chunk The chunk key to add the weight to
+     * @param weight The WeightFactor to add
+     */
     void addWeight(String chunk, WeightFactor weight) {
         // there's definitely a function that does this but I haven't used java in a while so idr what it is
         if(!this.weights.containsKey(chunk)) {
@@ -37,8 +47,11 @@ public class Chunk {
         this.weights.get(chunk).add(weight);
     }
 
+    /**
+     * Shortcut for adding a static weight
+     */
     void addWeight(String chunk, float weight) {
-        this.addWeight(chunk, (prevChunks) -> weight);
+        this.addWeight(chunk, (_generator) -> weight);
     }
 
     int getWidth() {
