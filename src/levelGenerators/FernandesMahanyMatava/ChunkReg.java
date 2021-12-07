@@ -133,7 +133,7 @@ public class ChunkReg {
         CHUNKS = new HashMap<>();
 
         // TODO: might want to move all the addWeights after the HashMap is filled otherwise we won't be able to use tags here in the future
-        //       (or if we make this deferred somehow it could allow the layout to stay the same?)git
+        //       (or if we make this deferred somehow it could allow the layout to stay the same?)
 
         CHUNKS.put("START", new Chunk("""
             -------
