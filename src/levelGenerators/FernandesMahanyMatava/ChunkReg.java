@@ -399,6 +399,9 @@ public class ChunkReg {
             XXXX
             """));
 
+        CHUNKS.put("TEST_A", new Chunk(""));
+        CHUNKS.put("TEST_B", new Chunk(""));
+        CHUNKS.put("TEST_C", new Chunk(""));
     }
 
 }

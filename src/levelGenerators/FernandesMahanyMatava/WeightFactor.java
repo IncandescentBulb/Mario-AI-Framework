@@ -49,7 +49,7 @@ class SpecificChunkFactor implements WeightFactor {
     //           already have separate constructors.
     static List<String> withinOptions = Arrays.asList("Prior", "All", "FirstX", "LastX");
     /* Valid values for within
-    * Prior: The last chunk currently in the level
+    * Prior: The second-last chunk currently in the level
     * All: All chunks within the level
     * FirstX: the first X chunks in the level: requires setting X
     * LastX: the last X chunks in the level: requires setting X
@@ -57,6 +57,8 @@ class SpecificChunkFactor implements WeightFactor {
     * not yet implemented
     * notFirstX: all except the first X chunks in level: requires setting X
     * notLastX: all except the first X chunks in level: requires setting X
+    * Xth:? Xth chunk in level (can do with FirstX with X and FirstX with X-1 and opposite weight)
+    * XthLast:? Xth-last chunk in level (can do with LastX with X and LastX with X-1 and opposite weight)
     * */
     int X; // A value tied to some versions of this.within
 
@@ -100,7 +102,7 @@ class SpecificChunkFactor implements WeightFactor {
     boolean validWithin(String within){ // Is the given string an implemented Within option?
         int size = withinOptions.size();
         int i;
-        for (i = 0; i == size; i++){// for each Within option
+        for (i = 0; i < size; i++){// for each Within option
             if (within.equals(withinOptions.get(i))){
                 return true;
             }
@@ -110,7 +112,7 @@ class SpecificChunkFactor implements WeightFactor {
 
     @Override
     public float getWeight(LevelGenerator generator) {
-        int i;
+        int i, j;
         if(within.equals("Prior")) {
             return generator.chunks.size() < 2 ?
                     0.0f
@@ -138,7 +140,8 @@ class SpecificChunkFactor implements WeightFactor {
             if (X > generator.chunks.size()){ // if X is too long for current level
                 X = generator.chunks.size(); //set X to length; will function like "All"
             }
-            for(i = generator.chunks.size() - 1; i >= 0; i--){
+            j = generator.chunks.size() - 1 - X;
+            for(i = generator.chunks.size() - 1; i > j; i--){
                 if (generator.chunks.get(i).equals(this.chunkName)){
                     return this.weight;
                 }
