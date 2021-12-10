@@ -1,5 +1,6 @@
 package levelGenerators.FernandesMahanyMatava;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class ChunkReg {
@@ -377,6 +378,413 @@ public class ChunkReg {
         CHUNKS.get("HIGH_SECTION_END").addWeight("PIT", 0.2f);
         CHUNKS.get("HIGH_SECTION_END").addWeight("ENEMIES_1", 0.2f);
 
+        CHUNKS.put("MUSHROOM_1", new Chunk("""
+            -%%%%-
+            --||--
+            --||--
+            """));
+
+        CHUNKS.put("MUSHROOM_1_HARD", new Chunk("""
+            ---g--
+            -%%%%-
+            --||--
+            --||--
+            """));
+
+        CHUNKS.put("MUSHROOM_2", new Chunk("""
+            ----ooor--
+            ---%%%%%--
+            ----|||---
+            ----|||---
+            ----|||---
+            -%%%%%%%%-
+            --||||||--
+            --||||||--
+            --||||||--
+            --||||||--
+            --||||||--
+            """));
+
+        CHUNKS.put("MUSHROOM_2_HARD", new Chunk("""
+            ---rooo---
+            --%%%%%---
+            ---|||--o-
+            ---|||--o-
+            ---|||--G-
+            -%%%%%%%%-
+            --||||||--
+            --||||||--
+            --||||||--
+            --||||||--
+            --||||||--
+            """));
+
+        CHUNKS.put("MUSHROOM_3", new Chunk("""
+            -----
+            -----
+            -----
+            %%%%%
+            -|||-
+            -|||-
+            -|||-
+            -|||-
+            -|||-
+            -|||-
+            """));
+
+        CHUNKS.put("MUSHROOM_3_HARD", new Chunk("""
+            ---g-
+            %%%%%
+            -|||-
+            -|||-
+            -|||-
+            -|||-
+            -|||-
+            -|||-
+            """));
+
+        CHUNKS.put("MUSHROOM_4", new Chunk("""
+            ----g-g
+            %%%%%%%
+            -|||||-
+            -|||||-
+            -|||||-
+            -|||||-
+            -|||||-
+            -|||||-
+            -|||||-
+            -|||||-
+            -|||||-
+            -|||||-
+            """));
+
+        CHUNKS.put("MUSHROOM_5", new Chunk("""
+            -%%%-
+            --|--
+            --|--
+            """));
+
+        CHUNKS.put("MUSHROOM_5_HARD", new Chunk("""
+            ---g-
+            -%%%-
+            --|--
+            --|--
+            """));
+
+        CHUNKS.put("MUSHROOM_6", new Chunk("""
+            --oooo-
+            --%%%%-
+            ---||--
+            ---||--
+            ---||--
+            -U-||--
+            ---||--
+            ---||--
+            ---||--
+            -%%%%%-
+            --|||--
+            """));
+
+        CHUNKS.put("MUSHROOM_7", new Chunk("""
+            %%%%%-
+            -|||--
+            """));
+
+        CHUNKS.put("MUSHROOM_7_HARD", new Chunk("""
+            --K---
+            ------
+            ------
+            ------
+            ------
+            %%%%%-
+            -|||--
+            """));
+
+        CHUNKS.put("MUSHROOM_8", new Chunk("""
+            %%%
+            -|-
+            -|-
+            -|-
+            -|-
+            -|-
+            """));
+
+        CHUNKS.put("MUSHROOM_9", new Chunk("""
+            -----
+            -----
+            -----
+            -----
+            -----
+            -----
+            ---r-
+            -ooo-
+            -%%%-
+            --|--
+            """));
+
+        CHUNKS.put("MUSHROOM_10", new Chunk("""
+            ---ooo-
+            -------
+            ---%%%-
+            ----|--
+            ----|--
+            ----|--
+            -%%%|--
+            --|-|--
+            --|-|--
+            --|-|--
+            """));
+
+        CHUNKS.put("MUSHROOM_GAP_1", new Chunk("""
+            -oo--
+            -----
+            -----
+            -SSS-
+            -----
+            -----
+            -----
+            -----
+            -----
+            -----
+            """));
+
+        CHUNKS.put("MUSHROOM_GAP_2", new Chunk("""
+            -------
+            ---SS--
+            ---S---
+            ---S---
+            --SS---
+            -------
+            -------
+            """));
+
+        CHUNKS.put("MUSHROOM_GAP_2_HARD", new Chunk("""
+            ---!---
+            -------
+            ----K--
+            -------
+            --SSS--
+            -------
+            -------
+            """));
+
+        CHUNKS.put("MUSHROOM_GAP_3", new Chunk("""
+            -oooo-
+            -SSSS-
+            ------
+            ------
+            ------
+            ------
+            ------
+            ------
+            ------
+            ------
+            """));
+
+        // TODO: this is probably the worst thing ever right now
+        for(int i = 0; i < 10; i++){
+            for(int h = 0; h < 2; h++) {
+                var key = "MUSHROOM_" + (i + 1);
+                if(h == 1) {
+                    key += "_HARD";
+                    if(!CHUNKS.containsKey(key)) {
+                        continue;
+                    }
+                }
+                CHUNKS.get(key).addWeight("MUSHROOM_1", 1.0f).addWeight("MUSHROOM_1", new SpecificChunkFactor("MUSHROOM_1", -0.8f, "LastX", 3));
+                CHUNKS.get(key).addWeight("MUSHROOM_1_HARD", 0.25f); // TODO: factor in difficulty setting
+                CHUNKS.get(key).addWeight("MUSHROOM_2", 1.0f)
+                        .addWeight("MUSHROOM_2", new SpecificChunkFactor("MUSHROOM_2", -0.8f, "LastX", 3))
+                        .addWeight("MUSHROOM_2_HARD", new SpecificChunkFactor("MUSHROOM_2_HARD", -0.8f, "LastX", 3));
+                CHUNKS.get(key).addWeight("MUSHROOM_2_HARD", 0.25f) // TODO: factor in difficulty setting
+                        .addWeight("MUSHROOM_2", new SpecificChunkFactor("MUSHROOM_2", -0.2f, "LastX", 3))
+                        .addWeight("MUSHROOM_2_HARD", new SpecificChunkFactor("MUSHROOM_2_HARD", -0.2f, "LastX", 3));
+                if (!Arrays.asList(7, 9).contains(i + 1)) {
+                    CHUNKS.get(key).addWeight("MUSHROOM_3", 1.0f).addWeight("MUSHROOM_3", new SpecificChunkFactor("MUSHROOM_3", -0.8f, "LastX", 3));;
+                    CHUNKS.get(key).addWeight("MUSHROOM_3_HARD", 0.25f); // TODO: factor in difficulty setting
+                }
+                if (!Arrays.asList(1, 5, 7, 9).contains(i + 1)) {
+                    CHUNKS.get(key).addWeight("MUSHROOM_4", 1.0f).addWeight("MUSHROOM_4", new SpecificChunkFactor("MUSHROOM_4", -0.8f, "LastX", 3));;
+                    CHUNKS.get(key).addWeight("MUSHROOM_5", 0.5f)
+                            .addWeight("MUSHROOM_5", new SpecificChunkFactor("MUSHROOM_5", -0.8f, "LastX", 3))
+                            .addWeight("MUSHROOM_5_HARD", new SpecificChunkFactor("MUSHROOM_5_HARD", -0.8f, "LastX", 3));
+                    CHUNKS.get(key).addWeight("MUSHROOM_5_HARD", 0.5f)
+                            .addWeight("MUSHROOM_5", new SpecificChunkFactor("MUSHROOM_5", -0.8f, "LastX", 3))
+                            .addWeight("MUSHROOM_5_HARD", new SpecificChunkFactor("MUSHROOM_5_HARD", -0.8f, "LastX", 3));
+                }
+                CHUNKS.get(key).addWeight("MUSHROOM_6", 1.0f).addWeight("MUSHROOM_6", new SpecificChunkFactor("MUSHROOM_6", -0.8f, "LastX", 3));
+                CHUNKS.get(key).addWeight("MUSHROOM_7", 1.0f).addWeight("MUSHROOM_7", new SpecificChunkFactor("MUSHROOM_7", -0.8f, "LastX", 3));
+                CHUNKS.get(key).addWeight("MUSHROOM_7_HARD", 0.1f); // TODO: factor in difficulty setting
+                CHUNKS.get(key).addWeight("MUSHROOM_8", 1.0f).addWeight("MUSHROOM_8", new SpecificChunkFactor("MUSHROOM_8", -0.8f, "LastX", 3));
+                CHUNKS.get(key).addWeight("MUSHROOM_9", 1.0f).addWeight("MUSHROOM_9", new SpecificChunkFactor("MUSHROOM_9", -0.8f, "LastX", 3));
+                CHUNKS.get(key).addWeight("MUSHROOM_10", 1.0f).addWeight("MUSHROOM_10", new SpecificChunkFactor("MUSHROOM_10", -0.8f, "LastX", 3));
+
+                CHUNKS.get(key).addWeight(key, -0.8f);
+
+                CHUNKS.get(key).addWeight("MUSHROOM_GAP_2", 0.25f);
+                CHUNKS.get(key).addWeight("MUSHROOM_GAP_2_HARD", 0.1f); // TODO: factor in difficulty setting
+                if (!Arrays.asList(1, 7, 9).contains(i + 1)) {
+                    CHUNKS.get(key).addWeight("MUSHROOM_GAP_1", 0.25f);
+                    CHUNKS.get(key).addWeight("MUSHROOM_GAP_3", 0.25f);
+                }
+            }
+        }
+
+        for(int i = 0; i < 3; i++){
+            for(int h = 0; h < 2; h++) {
+                var key = "MUSHROOM_GAP_" + (i + 1);
+                if (h == 1) {
+                    key += "_HARD";
+                    if (!CHUNKS.containsKey(key)) {
+                        continue;
+                    }
+                }
+                CHUNKS.get(key).addWeight("MUSHROOM_1", 1.0f).addWeight("MUSHROOM_1", new SpecificChunkFactor("MUSHROOM_1", -0.8f, "LastX", 3));
+                CHUNKS.get(key).addWeight("MUSHROOM_1_HARD", 0.25f); // TODO: factor in difficulty setting
+                CHUNKS.get(key).addWeight("MUSHROOM_2", 1.0f).addWeight("MUSHROOM_2", new SpecificChunkFactor("MUSHROOM_2", -0.8f, "LastX", 3));;
+                CHUNKS.get(key).addWeight("MUSHROOM_2_HARD", 0.25f); // TODO: factor in difficulty setting
+//                if (!Arrays.asList(7, 9).contains(i + 1)) {
+                    CHUNKS.get(key).addWeight("MUSHROOM_3", 1.0f).addWeight("MUSHROOM_3", new SpecificChunkFactor("MUSHROOM_3", -0.8f, "LastX", 3));;
+                    CHUNKS.get(key).addWeight("MUSHROOM_3_HARD", 0.25f); // TODO: factor in difficulty setting
+//                }
+                if (!Arrays.asList(2, 3).contains(i + 1)) {
+                    CHUNKS.get(key).addWeight("MUSHROOM_4", 1.0f).addWeight("MUSHROOM_4", new SpecificChunkFactor("MUSHROOM_4", -0.8f, "LastX", 3));;
+                    CHUNKS.get(key).addWeight("MUSHROOM_5", 1.0f).addWeight("MUSHROOM_5", new SpecificChunkFactor("MUSHROOM_5", -0.8f, "LastX", 3));;
+                }
+                CHUNKS.get(key).addWeight("MUSHROOM_6", 1.0f).addWeight("MUSHROOM_6", new SpecificChunkFactor("MUSHROOM_6", -0.8f, "LastX", 3));
+                CHUNKS.get(key).addWeight("MUSHROOM_7", 1.0f)
+                        .addWeight("MUSHROOM_7", new SpecificChunkFactor("MUSHROOM_7", -0.8f, "LastX", 3))
+                        .addWeight("MUSHROOM_7_HARD", new SpecificChunkFactor("MUSHROOM_7_HARD", -0.8f, "LastX", 3));
+                CHUNKS.get(key).addWeight("MUSHROOM_7_HARD", 0.1f) // TODO: factor in difficulty setting
+                        .addWeight("MUSHROOM_7", new SpecificChunkFactor("MUSHROOM_7", -0.05f, "LastX", 3))
+                        .addWeight("MUSHROOM_7_HARD", new SpecificChunkFactor("MUSHROOM_7_HARD", -0.05f, "LastX", 3));
+                CHUNKS.get(key).addWeight("MUSHROOM_8", 1.0f).addWeight("MUSHROOM_8", new SpecificChunkFactor("MUSHROOM_8", -0.8f, "LastX", 3));
+                CHUNKS.get(key).addWeight("MUSHROOM_9", 1.0f).addWeight("MUSHROOM_9", new SpecificChunkFactor("MUSHROOM_9", -0.8f, "LastX", 3));
+                CHUNKS.get(key).addWeight("MUSHROOM_10", 1.0f).addWeight("MUSHROOM_10", new SpecificChunkFactor("MUSHROOM_10", -0.8f, "LastX", 3));
+
+                CHUNKS.get(key).addWeight(key, -0.8f);
+
+                CHUNKS.get(key).addWeight("MUSHROOM_GAP_2", 0.25f);
+                CHUNKS.get(key).addWeight("MUSHROOM_GAP_2_HARD", 0.1f); // TODO: factor in difficulty setting
+                if (!Arrays.asList(1, 7, 9).contains(i + 1)) {
+                    CHUNKS.get(key).addWeight("MUSHROOM_GAP_1", 0.25f);
+                    CHUNKS.get(key).addWeight("MUSHROOM_GAP_3", 0.25f);
+                }
+            }
+        }
+
+        CHUNKS.put("", new Chunk("""
+            ----------LSSS------
+            --------------------
+            ------g-------------
+            ------#-------------
+            -----##---2-----#---
+            ----###---------#---
+            ---####---------##--
+            --#####----kk---##--
+            XXXXXXXXXXXXXXXXXXXX
+            XXXXXXXXXXXXXXXXXXXX
+            """));
+
+        CHUNKS.put("", new Chunk("""
+            --QQQQQ--
+            ---------
+            ---------
+            ----k----
+            --?QQQQ--
+            ---------
+            ---------
+            ---------
+            XXXXXXXXX
+            XXXXXXXXX
+            """));
+
+        CHUNKS.put("", new Chunk("""
+            ---SSCSS-----
+            -------------
+            -------------
+            -------------
+            -QQQQ--QQQ---
+            -------------
+            -------------
+            ----------ggg
+            XXXXXXXXXXXXX
+            XXXXXXXXXXXXX
+            """));
+
+        CHUNKS.put("", new Chunk("""
+            -SSSS-
+            ------
+            ------
+            ------
+            ------
+            ------
+            ------
+            ------
+            X----X
+            X----X
+            """));
+
+        CHUNKS.put("", new Chunk("""
+            -g-------
+            -TT------
+            -TT------
+            -TT------
+            -TT------
+            XXXX---XX
+            XXXX---XX
+            """));
+
+        CHUNKS.put("", new Chunk("""
+            USSS
+            ----
+            ----
+            ----
+            ----
+            -tt-
+            -tt-
+            -tt-
+            XXXX
+            XXXX
+            """));
+
+        CHUNKS.put("", new Chunk("""
+            -SSQSSS?SSS--
+            -------------
+            -------------
+            ---K---------
+            -SSSSSSSSSSS-
+            -------------
+            -------------
+            ---------K---
+            XXXXXXXXXXXXX
+            XXXXXXXXXXXXX
+            """));
+
+        CHUNKS.put("", new Chunk("""
+            --k-------
+            -SQS--SQS-
+            ----------
+            ----------
+            ----------
+            -SQS--S?S-
+            ----------
+            ----------
+            ------ggg-
+            XXXXXXXXXX
+            XXXXXXXXXX
+            """));
+
+        CHUNKS.put("", new Chunk("""
+            ----k--
+            -SCSSS-
+            ---K---
+            -------
+            -K---K-
+            XXXXXXX
+            XXXXXXX
+            """));
+
         CHUNKS.put("END_STAIRS", new Chunk("""
             --------##-------
             -------###-------
@@ -390,6 +798,36 @@ public class ChunkReg {
             XXXXXXXXXXXXXXXXX
             """));
         CHUNKS.get("END_STAIRS").addWeight("END", 1.0f);
+
+        CHUNKS.put("END_STAIRS_HARD_1", new Chunk("""
+            ---------k-------
+            --------##-------
+            -------###-------
+            -----k####-------
+            -----#####-------
+            ----######-------
+            ---#######-------
+            --########-------
+            -#########-------
+            XXXXXXXXXXXXXXXXX
+            XXXXXXXXXXXXXXXXX
+            """));
+        CHUNKS.get("END_STAIRS_HARD_1").addWeight("END", 1.0f);
+
+        CHUNKS.put("END_STAIRS_HARD_2", new Chunk("""
+            -----------------
+            ---------#-------
+            -------#-#-------
+            -------#-#-------
+            -----#-#-#-------
+            -----#-#-#-------
+            ---#-#-#-#-------
+            ---#-#-#-#-------
+            -#-#-#-#-#-------
+            XX-X-X-X-XXXXXXXX
+            XX-X-X-X-XXXXXXXX
+            """));
+        CHUNKS.get("END_STAIRS_HARD_2").addWeight("END", 1.0f);
 
         CHUNKS.put("END", new Chunk("""
             ----

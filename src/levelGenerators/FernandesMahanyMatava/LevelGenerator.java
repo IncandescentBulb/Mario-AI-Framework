@@ -56,7 +56,9 @@ public class LevelGenerator implements MarioLevelGenerator {
     public String getGeneratedLevel(MarioLevelModel model, MarioTimer timer) {
         this.chunks = new ArrayList<>();
 
-        this.chunks.add("START");
+        // set to "START" for non-mushroom level
+        // set to "MUSHROOM_7" for mushroom level
+        this.chunks.add("MUSHROOM_7");
 
         // keep adding chunks until it generates an END chunk
         // TODO: maybe should add a length limit here in case it gets stuck in a loop
