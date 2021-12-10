@@ -167,7 +167,7 @@ class SpecificTagFactor implements WeightFactor {
      * FirstX: the first X chunks in the level: requires setting X
      * LastX: the last X chunks in the level: requires setting X
      *
-     * not yet implemented
+     * not implemented
      * notFirstX: all except the first X chunks in level: requires setting X
      * notLastX: all except the first X chunks in level: requires setting X
      * Xth:? Xth chunk in level (can do with FirstX with X and FirstX with X-1 and opposite weight)
@@ -278,4 +278,46 @@ class SpecificTagFactor implements WeightFactor {
         return false;
     }
 
+}
+
+class TotalTagFactor implements WeightFactor{
+    String tag;
+    int limit;
+    float weight;
+    boolean lessThan;
+
+    TotalTagFactor(String tag, float weight, int limit){
+        this.tag = tag;
+        this.weight = weight;
+        this.limit = limit;
+        this.lessThan = false;
+    }
+
+    TotalTagFactor(String tag, float weight, int limit, boolean lessThan){
+        this.tag = tag;
+        this.weight = weight;
+        this.limit = limit;
+        this.lessThan = lessThan;
+    }
+    @Override
+    public float getWeight(LevelGenerator generator){
+        int i;
+        int total = 0;
+        for(i = 0; i < generator.chunks.size(); i++){ // iterate through entire level
+            if (checkTag(generator.chunks.get(i), tag)){// when the tag is found
+                total++;
+            }
+        }
+        if ((total >= limit) ^ lessThan){
+            return this.weight;
+        }
+        return 0.0f;
+    }
+
+    boolean checkTag(String chunkName, String tag){
+        if (ChunkReg.CHUNKS.containsKey(chunkName)){//if chunk exists
+            return ChunkReg.CHUNKS.get(chunkName).hasTag(tag);
+        }
+        return false;
+    }
 }

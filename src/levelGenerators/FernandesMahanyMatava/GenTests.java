@@ -142,6 +142,50 @@ public class GenTests {
         w = stfLastXAllNot.getWeight(gen);
         System.out.println("stfLastXAllNot test (0): returns " + w);
         */
+        System.out.println("TTF Tests");
+        LevelGenerator gen2 = new levelGenerators.FernandesMahanyMatava.LevelGenerator();
+        gen2.chunks = new ArrayList<>();
+        gen2.chunks.add("TEST_B");
+        gen2.chunks.add("TEST_A");
+        gen2.chunks.add("TEST_B");
+
+        /*
+        WeightFactor ttfA = new TotalTagFactor("TAG_A", 3.0f, 1);
+        w = ttfA.getWeight(gen2);
+        System.out.println("ttfA test (3.0): returns " + w);
+
+        WeightFactor ttfB = new TotalTagFactor("TAG_B", 3.0f, 2);
+        w = ttfB.getWeight(gen2);
+        System.out.println("ttfB test (3.0): returns " + w);
+
+        WeightFactor ttfBMinus = new TotalTagFactor("TAG_B", 3.0f, 1);
+        w = ttfBMinus.getWeight(gen2);
+        System.out.println("ttfBMinus test (3.0): returns " + w);
+
+        WeightFactor ttfANot = new TotalTagFactor("TAG_A", 3.0f, 2);
+        w = ttfANot.getWeight(gen2);
+        System.out.println("ttfANot test (0.0): returns " + w);
+
+        WeightFactor ttfBNot = new TotalTagFactor("TAG_B", 3.0f, 3);
+        w = ttfBNot.getWeight(gen2);
+        System.out.println("ttfBNot test (0.0): returns " + w);
+        */
+        WeightFactor ttfLessA = new TotalTagFactor("TAG_A", 3.1f, 2, true);
+        w = ttfLessA.getWeight(gen2);
+        System.out.println("ttfLessA test (3.1): returns " + w);
+
+        WeightFactor ttfLessB = new TotalTagFactor("TAG_B", 3.1f, 3, true);
+        w = ttfLessB.getWeight(gen2);
+        System.out.println("ttfLessB test (3.1): returns " + w);
+
+        WeightFactor ttfLessANot = new TotalTagFactor("TAG_A", 3.1f, 1, true);
+        w = ttfLessANot.getWeight(gen2);
+        System.out.println("ttfLessANot test (0.0): returns " + w);
+
+        WeightFactor ttfLessBNot = new TotalTagFactor("TAG_B", 3.1f, 2, true);
+        w = ttfLessBNot.getWeight(gen2);
+        System.out.println("ttfLessBNot test (0.0): returns " + w);
+
         System.out.println("End of GenTests");
     }
 }
