@@ -2,6 +2,7 @@ package levelGenerators.FernandesMahanyMatava;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
 
 interface WeightFactor {
     float getWeight(LevelGenerator generator);
@@ -49,7 +50,7 @@ class SpecificChunkFactor implements WeightFactor {
     //           already have separate constructors.
     static List<String> withinOptions = Arrays.asList("Prior", "All", "FirstX", "LastX");
     /* Valid values for within
-    * Prior: The last chunk currently in the level
+    * Prior: The second-last chunk currently in the level
     * All: All chunks within the level
     * FirstX: the first X chunks in the level: requires setting X
     * LastX: the last X chunks in the level: requires setting X
@@ -57,6 +58,8 @@ class SpecificChunkFactor implements WeightFactor {
     * not yet implemented
     * notFirstX: all except the first X chunks in level: requires setting X
     * notLastX: all except the first X chunks in level: requires setting X
+    * Xth:? Xth chunk in level (can do with FirstX with X and FirstX with X-1 and opposite weight)
+    * XthLast:? Xth-last chunk in level (can do with LastX with X and LastX with X-1 and opposite weight)
     * */
     int X; // A value tied to some versions of this.within
 
@@ -100,7 +103,7 @@ class SpecificChunkFactor implements WeightFactor {
     boolean validWithin(String within){ // Is the given string an implemented Within option?
         int size = withinOptions.size();
         int i;
-        for (i = 0; i == size; i++){// for each Within option
+        for (i = 0; i < size; i++){// for each Within option
             if (within.equals(withinOptions.get(i))){
                 return true;
             }
@@ -110,7 +113,7 @@ class SpecificChunkFactor implements WeightFactor {
 
     @Override
     public float getWeight(LevelGenerator generator) {
-        int i;
+        int i, j;
         if(within.equals("Prior")) {
             return generator.chunks.size() < 2 ?
                     0.0f
@@ -138,7 +141,8 @@ class SpecificChunkFactor implements WeightFactor {
             if (X > generator.chunks.size()){ // if X is too long for current level
                 X = generator.chunks.size(); //set X to length; will function like "All"
             }
-            for(i = generator.chunks.size() - 1; i >= 0; i--){
+            j = generator.chunks.size() - 1 - X;
+            for(i = generator.chunks.size() - 1; i > j; i--){
                 if (generator.chunks.get(i).equals(this.chunkName)){
                     return this.weight;
                 }
@@ -147,5 +151,251 @@ class SpecificChunkFactor implements WeightFactor {
         }
         // should have error report here
         return 0.0f; //this factor was made invalid, should not affect weight
+    }
+
+
+}
+
+class SpecificTagFactor implements WeightFactor {
+    String tagName; //name of tag to look for
+    float weight; // weight to apply if tag is found
+    String within; // specifies a set of chunks to look at
+
+    static List<String> withinOptions = Arrays.asList("Prior", "All", "FirstX", "LastX");
+    /* Valid values for within
+     * Prior: The second-last chunk currently in the level
+     * All: All chunks within the level
+     * FirstX: the first X chunks in the level: requires setting X
+     * LastX: the last X chunks in the level: requires setting X
+     *
+     * not implemented
+     * notFirstX: all except the first X chunks in level: requires setting X
+     * notLastX: all except the first X chunks in level: requires setting X
+     * Xth:? Xth chunk in level (can do with FirstX with X and FirstX with X-1 and opposite weight)
+     * XthLast:? Xth-last chunk in level (can do with LastX with X and LastX with X-1 and opposite weight)
+     * */
+    int X; // A value tied to some versions of this.within
+
+    SpecificTagFactor(String tagName, float weight) {// will function as PrevChunkFactor for tags
+        this.tagName = tagName;
+        this.weight = weight;
+        this.within = "Prior";
+        this.X = -1;
+    }
+
+    SpecificTagFactor(String tagName, float weight, String within) {// for non-X withins
+        /*if(!validWithin(within)){//
+            //SHOULD return error, but not necessary for now
+        }*/
+        this.tagName = tagName;
+        this.weight = weight;
+        this.within = within;
+        this.X = -1;
+        if (this.within.equals("FirstX") || this.within.equals("LastX")){ //if within uses X
+            // wrong constructor
+            this.X = 1; //SHOULD be error, but can default for now
+        }
+
+    }
+
+    SpecificTagFactor(String tagName, float weight, String within, int X) {// for withins that use X
+        /*if(!validWithin(within)){//
+            //SHOULD return error, but not necessary for now
+        }*/
+        this.tagName = tagName;
+        this.weight = weight;
+        this.within = within;
+        this.X = X;
+        //if (this.within.equals("Prior") || this.within.equals("All")){ //if within does not use X
+        //wrong constructor
+        //SHOULD be error, but can do nothing for now
+        //}
+    }
+
+
+    boolean validWithin(String within){ // Is the given string an implemented Within option?
+        int size = withinOptions.size();
+        int i;
+        for (i = 0; i < size; i++){// for each Within option
+            if (within.equals(withinOptions.get(i))){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public float getWeight(LevelGenerator generator) {
+        int i, j;
+        if(within.equals("Prior")) {
+            //return generator.chunks.size() < 2 ?
+            //        0.0f
+            //        : (generator.chunks.get(generator.chunks.size() - 2).equals(this.tagName) ?
+            //        this.weight
+            //        : 0.0f);
+            if (generator.chunks.size() >= 2){
+                if(checkTag(generator.chunks.get(generator.chunks.size() - 2), tagName)){
+                    return this.weight;
+                }
+            }
+            return 0.0f;
+        } else if (within.equals("All")){
+            for(i = 0; i < generator.chunks.size(); i++){ // iterate through entire level
+                if (checkTag(generator.chunks.get(i), tagName)){// when the chunk is found
+                    return this.weight;
+                }
+            }
+            return 0.0f;
+        } else if (within.equals("FirstX")){
+            if (X > generator.chunks.size()){ // if X is too long for current level
+                X = generator.chunks.size(); //set X to length; will function like "All"
+            }
+            for(i = 0; i < X; i++){ // iterate through first X chunks of level
+                if (checkTag(generator.chunks.get(i), tagName)){
+                    return this.weight;
+                }
+            }
+            return 0.0f;
+        } else if (within.equals("LastX")){
+            if (X > generator.chunks.size()){ // if X is too long for current level
+                X = generator.chunks.size(); //set X to length; will function like "All"
+            }
+            j = generator.chunks.size() - 1 - X;
+            for(i = generator.chunks.size() - 1; i > j; i--){
+                if (checkTag(generator.chunks.get(i), tagName)){
+                    return this.weight;
+                }
+            }
+            return 0.0f;
+        }
+        // should have error report here
+        return 0.0f; //this factor was made invalid, should not affect weight
+    }
+
+    boolean checkTag(String chunkName, String tag){
+        if (ChunkReg.CHUNKS.containsKey(chunkName)){//if chunk exists
+            return ChunkReg.CHUNKS.get(chunkName).hasTag(tag);
+        }
+        return false;
+    }
+
+}
+
+class TotalTagFactor implements WeightFactor{
+    String tag;
+    int limit;
+    float weight;
+    boolean lessThan = false;
+    boolean multiply = false;
+
+    TotalTagFactor(String tag, float weight, int limit){
+        this.tag = tag;
+        this.weight = weight;
+        this.limit = limit;
+    }
+
+    TotalTagFactor(String tag, float weight, int limit, boolean lessThan){
+        this.tag = tag;
+        this.weight = weight;
+        this.limit = limit;
+        this.lessThan = lessThan;
+    }
+
+    TotalTagFactor(String tag, float weight, int limit, String option){
+        this.tag = tag;
+        this.weight = weight;
+        this.limit = limit;
+        if(option.equals("<")){
+            this.lessThan = false;
+        } else if(option.equals("multiply")){
+            this.multiply = true;
+        }
+    }
+    @Override
+    public float getWeight(LevelGenerator generator){
+        int i;
+        int total = 0;
+        for(i = 0; i < generator.chunks.size(); i++){ // iterate through entire level
+            if (checkTag(generator.chunks.get(i), tag)){// when the tag is found
+                total++;
+            }
+        }
+        if(this.multiply){
+            return (this.weight * total);
+        }
+        if ((total >= limit) ^ lessThan){
+            return this.weight;
+        }
+        return 0.0f;
+    }
+
+    boolean checkTag(String chunkName, String tag){
+        if (ChunkReg.CHUNKS.containsKey(chunkName)){//if chunk exists
+            return ChunkReg.CHUNKS.get(chunkName).hasTag(tag);
+        }
+        return false;
+    }
+
+}
+
+class MultiFactor implements WeightFactor{
+    List<WeightFactor> factors;
+    float offset;
+    enum MFOption{
+        First, // the first factor result that isn't zero
+        Max, //highest result (that isn't zero)
+        Min, //lowest result (that isn't zero)
+    }
+    MFOption option;
+    MultiFactor(MFOption option){
+        this.factors = new ArrayList<>();
+        this.option = option;
+    }
+    void addFactor(WeightFactor f){
+        this.factors.add(f);
+    }
+    @Override
+    public float getWeight(LevelGenerator gen){
+        int i;
+        int l = factors.size();
+        float f, g;
+        switch (option) {
+            case First -> {
+                for (i = 0; i < l; i++) {
+                    f = factors.get(i).getWeight(gen);
+                    if (f != 0.0f) {
+                        return f;
+                    }
+                }
+                return 0.0f;
+            }
+            case Max -> {
+                g = 0.0f;
+                for (i = 0; i < l; i++) {
+                    f = factors.get(i).getWeight(gen);
+                    if (g == 0.0f) {
+                        g = f;
+                    } else if (f != 0.0f && f > g) {
+                        g = f;
+                    }
+                }
+                return g;
+            }
+            case Min -> {
+                g = 0.0f;
+                for (i = 0; i < l; i++) {
+                    f = factors.get(i).getWeight(gen);
+                    if (g == 0.0f) {
+                        g = f;
+                    } else if (f != 0.0f && f < g) {
+                        g = f;
+                    }
+                }
+                return g;
+            }
+            default -> {
+            }
+        }
+        return 0.0f;
     }
 }
