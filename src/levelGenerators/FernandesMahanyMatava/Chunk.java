@@ -12,10 +12,12 @@ public class Chunk {
      * The WeightFactors are summed to calculate the total weight for that next chunk
      */
     HashMap<String, List<WeightFactor>> weights;
+    List<String> tags;
 
     Chunk(String tiles) {
         this.tiles = tiles;
         this.weights = new HashMap<>();
+        this.tags = new ArrayList<>();
     }
 
     /**
@@ -32,6 +34,16 @@ public class Chunk {
         });
 
         return calc;
+    }
+
+    void addTag(String tag){
+        //if(!tags.contains(tag)) {
+        tags.add(tag);
+        //}
+    }
+
+    boolean hasTag(String tag){
+        return tags.contains(tag);
     }
 
     /**

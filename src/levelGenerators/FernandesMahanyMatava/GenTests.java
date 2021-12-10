@@ -13,11 +13,15 @@ public class GenTests {
         gen.chunks.add("TEST_A");
         gen.chunks.add("TEST_B");
         gen.chunks.add("TEST_C");
+
         /*
+        //System.out.println("Simple test");
         //WeightFactor simple1 = new SimpleFactor(1.0f); ///Uncomment SimpleFactor class below before this
         //w = simple1.getWeight(gen);
         //System.out.println("simple1 test (1.0: returns " + w);
-
+        */
+        System.out.println("SCF Tests");
+        /*
         WeightFactor scfPrior = new SpecificChunkFactor("TEST_B", 1.1f);
         w = scfPrior.getWeight(gen);
         System.out.println("scfPrior test (1.1): returns " + w);
@@ -46,6 +50,7 @@ public class GenTests {
         w = scfAllNot.getWeight(gen);
         System.out.println("scfAllNot test (0): returns " + w);
         */
+        /*
         WeightFactor scfFirstX1 = new SpecificChunkFactor("TEST_A", 1.3f, "FirstX", 2);
         w = scfFirstX1.getWeight(gen);
         System.out.println("scfFirstX1 test (1.3): returns " + w);
@@ -65,6 +70,7 @@ public class GenTests {
         WeightFactor scfFirstXAllNot = new SpecificChunkFactor("BRICKS_1", 1.3f, "FirstX", 5);
         w = scfFirstXAllNot.getWeight(gen);
         System.out.println("scfFirstXAllNot test (0): returns " + w);
+        */
         /*
         WeightFactor scfLastX1 = new SpecificChunkFactor("TEST_C", 1.4f, "LastX", 2);
         w = scfLastX1.getWeight(gen);
@@ -86,7 +92,56 @@ public class GenTests {
         w = scfLastXAllNot.getWeight(gen);
         System.out.println("scfLastXAllNot test (0): returns " + w);
         */
+        System.out.println("STF Tests");
+        /*
+        WeightFactor stfPrior = new SpecificTagFactor("TAG_B", 2.1f);
+        w = stfPrior.getWeight(gen);
+        System.out.println("stfPrior test (2.1): returns " + w);
 
+        WeightFactor stfPriorNot = new SpecificTagFactor("TAG_C", 2.1f);
+        w = stfPriorNot.getWeight(gen);
+        System.out.println("stfPriorNot test (0): returns " + w);
+
+        WeightFactor stfPriorNot2 = new SpecificTagFactor("TAG_A", 2.1f);
+        w = stfPriorNot2.getWeight(gen);
+        System.out.println("stfPriorNot2 test (0): returns " + w);
+
+        WeightFactor stfAll1 = new SpecificTagFactor("TAG_A", 2.2f, "All");
+        w = stfAll1.getWeight(gen);
+        System.out.println("stfAll1 test (2.2): returns " + w);
+
+        WeightFactor stfAll2 = new SpecificTagFactor("TAG_B", 2.2f, "All");
+        w = stfAll2.getWeight(gen);
+        System.out.println("stfAll2 test (2.2): returns " + w);
+
+        WeightFactor stfAll3 = new SpecificTagFactor("TAG_C", 2.2f, "All");
+        w = stfAll3.getWeight(gen);
+        System.out.println("stfAll3 test (2.2): returns " + w);
+
+        WeightFactor stfAllNot = new SpecificTagFactor("TAG_D", 2.2f, "All");
+        w = stfAllNot.getWeight(gen);
+        System.out.println("stfAllNot test (0): returns " + w);
+
+        WeightFactor stfLastX1 = new SpecificTagFactor("TAG_C", 2.4f, "LastX", 2);
+        w = stfLastX1.getWeight(gen);
+        System.out.println("stfLastX1 test (2.4): returns " + w);
+
+        WeightFactor stfLastX2 = new SpecificTagFactor("TAG_B", 2.4f, "LastX", 2);
+        w = stfLastX2.getWeight(gen);
+        System.out.println("stfLastX2 test (2.4): returns " + w);
+
+        WeightFactor stfLastXNot = new SpecificTagFactor("TAG_A", 2.4f, "LastX", 2);
+        w = stfLastXNot.getWeight(gen);
+        System.out.println("stfLastXNot test (0): returns " + w);
+
+        WeightFactor stfLastXAll = new SpecificTagFactor("TAG_A", 2.4f, "LastX", 5);
+        w = stfLastXAll.getWeight(gen);
+        System.out.println("stfLastXAll test (2.4): returns " + w);
+
+        WeightFactor stfLastXAllNot = new SpecificTagFactor("TAG_D", 2.4f, "LastX", 5);
+        w = stfLastXAllNot.getWeight(gen);
+        System.out.println("stfLastXAllNot test (0): returns " + w);
+        */
         System.out.println("End of GenTests");
     }
 }

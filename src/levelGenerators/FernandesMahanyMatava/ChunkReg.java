@@ -400,8 +400,25 @@ public class ChunkReg {
             """));
 
         CHUNKS.put("TEST_A", new Chunk(""));
+        CHUNKS.get("TEST_A").tags.add("TAG_A");
         CHUNKS.put("TEST_B", new Chunk(""));
+        CHUNKS.get("TEST_B").tags.add("TAG_B");
         CHUNKS.put("TEST_C", new Chunk(""));
+        CHUNKS.get("TEST_C").tags.add("TAG_C");
     }
 
+    /*boolean checkTag(String chunkName, String tag){
+        if (CHUNKS.containsKey(chunkName)){//if chunk exists
+            return CHUNKS.get(chunkName).hasTag(tag);
+        }
+        return false;
+    }*/
+
 }
+
+    /*boolean checkTag(String chunkName, String tag){
+        if (ChunkReg.CHUNKS.containsKey(chunkName)){//if chunk exists
+            return ChunkReg.CHUNKS.get(chunkName).hasTag(tag);
+        }
+        return false;
+    }*/
