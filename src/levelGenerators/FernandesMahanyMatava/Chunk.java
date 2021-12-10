@@ -51,19 +51,21 @@ public class Chunk {
      * @param chunk The chunk key to add the weight to
      * @param weight The WeightFactor to add
      */
-    void addWeight(String chunk, WeightFactor weight) {
+    Chunk addWeight(String chunk, WeightFactor weight) {
         // there's definitely a function that does this but I haven't used java in a while so idr what it is
         if(!this.weights.containsKey(chunk)) {
             this.weights.put(chunk, new ArrayList<>());
         }
         this.weights.get(chunk).add(weight);
+        return this;
     }
 
     /**
      * Shortcut for adding a static weight
      */
-    void addWeight(String chunk, float weight) {
+    Chunk addWeight(String chunk, float weight) {
         this.addWeight(chunk, (_generator) -> weight);
+        return this;
     }
 
     int getWidth() {
