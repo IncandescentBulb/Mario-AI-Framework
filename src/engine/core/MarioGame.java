@@ -5,6 +5,7 @@ import java.awt.image.VolatileImage;
 import java.util.ArrayList;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
+import java.awt.event.*;
 
 import javax.swing.JFrame;
 
@@ -53,12 +54,14 @@ public class MarioGame {
     private MarioEvent[] killEvents;
 
     //visualization
+    public boolean first = true;
     private JFrame window = null;
     private MarioRender render = null;
     private MarioAgent agent = null;
     private MarioWorld world = null;
     private boolean ended = false;
     private boolean exited = false;
+    private boolean restarting = false;
     public KeyAdapter waitFor = null;
 
     /**
@@ -113,18 +116,28 @@ public class MarioGame {
 
         private void toggleKey(int keyCode, boolean isPressed) {
             switch (keyCode) {
-                case KeyEvent.VK_ENTER:
+                case KeyEvent.VK_ENTER: // generate new level
                     game.lose();
+                    System.out.println("enter");
+                    game.ended = true;
                     game.closeWindow();
-                    ended = true;
                     break;
-                case KeyEvent.VK_ESCAPE:
+                case KeyEvent.VK_ESCAPE: // go back to input parameters
                     game.lose();
-                    game.closeWindow();
                     exited = true;
+                    game.closeWindow();
                     break;
-                case KeyEvent.VK_BACK_SPACE:
+                case KeyEvent.VK_BACK_SPACE: // restart with same level
                     game.lose();
+                    restarting = true;
+                    game.closeWindow();
+                    break;
+                case KeyEvent.VK_DEAD_TILDE:
+                    System.out.println("tilde");
+                    game.lose();
+
+                    //restarting = true;
+                    //game.closeWindow();
                     break;
             }
         }
@@ -141,6 +154,7 @@ public class MarioGame {
     public boolean getExited(){
         return exited;
     }
+    public boolean getRestarting() { return restarting;}
 
     /**
      * Play a certain mario level
@@ -260,6 +274,9 @@ public class MarioGame {
      */
     public MarioResult runGame(MarioAgent agent, String level, int timer, int marioState, boolean visuals, int fps, float scale) {
         if (visuals) {
+            this.ended = false;
+            this.exited = false;
+            this.restarting = false;
             this.window = new JFrame("Mario AI Framework");
             this.render = new MarioRender(scale);
             this.window.setContentPane(this.render);
@@ -268,12 +285,42 @@ public class MarioGame {
             this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.render.init();
             this.window.setVisible(true);
+            this.window.setAlwaysOnTop(true);
+            this.window.setAlwaysOnTop(false);
+            this.pause = false;
+            //pause = true;
+            //this.window.requestFocus();
+            //this.render.requestFocusInWindow();
         }
         this.setAgent(agent);
+
         return this.gameLoop(level, timer, marioState, visuals, fps);
     }
 
     private MarioResult gameLoop(String level, int timer, int marioState, boolean visual, int fps) {
+        this.window.addWindowFocusListener(new WindowAdapter() {
+
+            //To check window gained focus
+            public void windowGainedFocus(WindowEvent e) {
+                //set flag
+
+                pause = false;
+            }
+            //To check window lost focus
+            public void windowLostFocus(WindowEvent e) {
+                //set flag
+                //System.out.println("window lost focus");
+                pause = true;
+            }
+        });
+
+
+        this.render.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mousePressed(MouseEvent e) {
+                pause = false;
+            }
+        });
         this.world = new MarioWorld(this.killEvents);
         this.world.visuals = visual;
         this.world.initializeLevel(level, 1000 * timer);
@@ -294,6 +341,11 @@ public class MarioGame {
             backBuffer = this.render.getGraphics();
             currentBuffer = renderTarget.getGraphics();
             this.render.addFocusListener(this.render);
+            this.window.addWindowFocusListener(new WindowAdapter() {
+                public void windowGainedFocus(WindowEvent e) {
+                    render.requestFocusInWindow();
+                }
+            });
         }
 
         MarioTimer agentTimer = new MarioTimer(MarioGame.maxTime);
@@ -301,8 +353,13 @@ public class MarioGame {
 
         ArrayList<MarioEvent> gameEvents = new ArrayList<>();
         ArrayList<MarioAgentEvent> agentEvents = new ArrayList<>();
+        if(first){
+            pause = true;
+            first = false;
+        }
         while (this.world.gameStatus == GameStatus.RUNNING) {
-            if (!this.pause) {
+
+            if (!this.pause/* && this.render.focused*/) {
                 //get actions
                 agentTimer = new MarioTimer(MarioGame.maxTime);
                 boolean[] actions = this.agent.getActions(new MarioForwardModel(this.world.clone()), agentTimer);
@@ -334,6 +391,7 @@ public class MarioGame {
                 }
             }
         }
+
         return new MarioResult(this.world, gameEvents, agentEvents);
     }
 }
