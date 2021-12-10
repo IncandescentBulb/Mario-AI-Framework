@@ -2,6 +2,7 @@ package levelGenerators.FernandesMahanyMatava;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
 
 interface WeightFactor {
     float getWeight(LevelGenerator generator);
@@ -284,13 +285,13 @@ class TotalTagFactor implements WeightFactor{
     String tag;
     int limit;
     float weight;
-    boolean lessThan;
+    boolean lessThan = false;
+    boolean multiply = false;
 
     TotalTagFactor(String tag, float weight, int limit){
         this.tag = tag;
         this.weight = weight;
         this.limit = limit;
-        this.lessThan = false;
     }
 
     TotalTagFactor(String tag, float weight, int limit, boolean lessThan){
@@ -298,6 +299,17 @@ class TotalTagFactor implements WeightFactor{
         this.weight = weight;
         this.limit = limit;
         this.lessThan = lessThan;
+    }
+
+    TotalTagFactor(String tag, float weight, int limit, String option){
+        this.tag = tag;
+        this.weight = weight;
+        this.limit = limit;
+        if(option.equals("<")){
+            this.lessThan = false;
+        } else if(option.equals("multiply")){
+            this.multiply = true;
+        }
     }
     @Override
     public float getWeight(LevelGenerator generator){
@@ -307,6 +319,9 @@ class TotalTagFactor implements WeightFactor{
             if (checkTag(generator.chunks.get(i), tag)){// when the tag is found
                 total++;
             }
+        }
+        if(this.multiply){
+            return (this.weight * total);
         }
         if ((total >= limit) ^ lessThan){
             return this.weight;
@@ -319,5 +334,68 @@ class TotalTagFactor implements WeightFactor{
             return ChunkReg.CHUNKS.get(chunkName).hasTag(tag);
         }
         return false;
+    }
+
+}
+
+class MultiFactor implements WeightFactor{
+    List<WeightFactor> factors;
+    float offset;
+    enum MFOption{
+        First, // the first factor result that isn't zero
+        Max, //highest result (that isn't zero)
+        Min, //lowest result (that isn't zero)
+    }
+    MFOption option;
+    MultiFactor(MFOption option){
+        this.factors = new ArrayList<>();
+        this.option = option;
+    }
+    void addFactor(WeightFactor f){
+        this.factors.add(f);
+    }
+    @Override
+    public float getWeight(LevelGenerator gen){
+        int i;
+        int l = factors.size();
+        float f, g;
+        switch (option) {
+            case First -> {
+                for (i = 0; i < l; i++) {
+                    f = factors.get(i).getWeight(gen);
+                    if (f != 0.0f) {
+                        return f;
+                    }
+                }
+                return 0.0f;
+            }
+            case Max -> {
+                g = 0.0f;
+                for (i = 0; i < l; i++) {
+                    f = factors.get(i).getWeight(gen);
+                    if (g == 0.0f) {
+                        g = f;
+                    } else if (f != 0.0f && f > g) {
+                        g = f;
+                    }
+                }
+                return g;
+            }
+            case Min -> {
+                g = 0.0f;
+                for (i = 0; i < l; i++) {
+                    f = factors.get(i).getWeight(gen);
+                    if (g == 0.0f) {
+                        g = f;
+                    } else if (f != 0.0f && f < g) {
+                        g = f;
+                    }
+                }
+                return g;
+            }
+            default -> {
+            }
+        }
+        return 0.0f;
     }
 }
