@@ -149,7 +149,7 @@ public class ChunkReg {
         CHUNKS.get("START").addWeight("PIT", 1.25f);
         CHUNKS.get("START").addWeight("ENEMIES_1", 1.0f);
         CHUNKS.get("START").addWeight("PIPE_2", 0.5f);
-
+        CHUNKS.get("START").tags.add(Tag.START);
         CHUNKS.put("BRICKS_1", new Chunk("""
             -SS@S-----
             ----------
@@ -164,7 +164,9 @@ public class ChunkReg {
         CHUNKS.get("BRICKS_1").addWeight("PIT", 0.25f);
         CHUNKS.get("BRICKS_1").addWeight("ENEMIES_1", 0.25f);
         CHUNKS.get("BRICKS_1").addWeight("PIPE_2", 0.1f);
-
+        CHUNKS.get("BRICKS_1").tags.add(Tag.ENEMY);
+        CHUNKS.get("BRICKS_1").tags.add(Tag.GOOMBA);
+        CHUNKS.get("BRICKS_1").tags.add(Tag.KOOPA);
         // some examples of things you can do
         //        allChunks.get("BRICKS_1").addWeight("END_STAIRS", new PrevChunkFactor("ENEMIES_1", 100.0f));
         //        allChunks.get("BRICKS_1").addWeight("END_STAIRS", new PrevChunkFactor("BRICKS_2", 100.0f));
@@ -191,6 +193,8 @@ public class ChunkReg {
         CHUNKS.get("BRICKS_2").addWeight("ENEMIES_1", 0.3f);
         CHUNKS.get("BRICKS_2").addWeight("PIPE_2", 0.1f);
 
+        CHUNKS.get("BRICKS_2").tags.add(Tag.ENEMY);
+        CHUNKS.get("BRICKS_2").tags.add(Tag.GOOMBA);
         CHUNKS.put("FOUR_QUESTION_BLOCKS", new Chunk("""
             -----@-----
             -----------
@@ -210,6 +214,9 @@ public class ChunkReg {
         CHUNKS.get("FOUR_QUESTION_BLOCKS").addWeight("ENEMIES_1", 0.25f);
         CHUNKS.get("FOUR_QUESTION_BLOCKS").addWeight("PIPE_2", 0.1f);
 
+        CHUNKS.get("FOUR_QUESTION_BLOCKS").tags.add(Tag.ENEMY);
+        CHUNKS.get("FOUR_QUESTION_BLOCKS").tags.add(Tag.KOOPA);
+
         CHUNKS.put("PIT", new Chunk("""
             -------
             XX---XX
@@ -221,6 +228,8 @@ public class ChunkReg {
         CHUNKS.get("PIT").addWeight("FOUR_QUESTION_BLOCKS", 0.25f);
         CHUNKS.get("PIT").addWeight("ENEMIES_1", 0.25f);
         CHUNKS.get("PIT").addWeight("PIPE_2", 0.1f);
+
+        CHUNKS.get("Pit").tags.add(Tag.PIT);
 
         CHUNKS.put("ENEMIES_1", new Chunk("""
             -r-g-g-
@@ -234,6 +243,10 @@ public class ChunkReg {
         CHUNKS.get("ENEMIES_1").addWeight("PIT", 0.25f);
         CHUNKS.get("ENEMIES_1").addWeight("PIPE_2", 0.1f);
 
+        CHUNKS.get("ENEMIES_1").tags.add(Tag.ENEMY);
+        CHUNKS.get("ENEMIES_1").tags.add(Tag.KOOPA);
+        CHUNKS.get("ENEMIES_1").tags.add(Tag.GOOMBA);
+
         CHUNKS.put("PIPE_2", new Chunk("""
             ----
             -tt-
@@ -244,6 +257,8 @@ public class ChunkReg {
         CHUNKS.get("PIPE_2").addWeight("PIPE_INBETWEEN_1", 0.5f);
         CHUNKS.get("PIPE_2").addWeight("PIPE_INBETWEEN_2", 0.5f);
 
+        CHUNKS.get("PIPE_2").tags.add(Tag.PIPE);
+
         CHUNKS.put("PIPE_3", new Chunk("""
             -tt-
             -tt-
@@ -253,6 +268,8 @@ public class ChunkReg {
             """));
         CHUNKS.get("PIPE_3").addWeight("PIPE_INBETWEEN_1", 0.5f);
         CHUNKS.get("PIPE_3").addWeight("PIPE_INBETWEEN_2", 0.5f);
+
+        CHUNKS.get("PIPE_3").tags.add(Tag.PIPE);
 
         CHUNKS.put("PIPE_4", new Chunk("""
             -tt-
@@ -265,6 +282,8 @@ public class ChunkReg {
         CHUNKS.get("PIPE_4").addWeight("PIPE_INBETWEEN_1", 0.5f);
         CHUNKS.get("PIPE_4").addWeight("PIPE_INBETWEEN_2", 0.5f);
 
+        CHUNKS.get("PIPE_4").tags.add(Tag.PIPE);
+
         CHUNKS.put("PIPE_5", new Chunk("""
             -tt-
             -tt-
@@ -275,6 +294,8 @@ public class ChunkReg {
             """));
         CHUNKS.get("PIPE_5").addWeight("PIPE_INBETWEEN_1", 0.5f);
         CHUNKS.get("PIPE_5").addWeight("PIPE_INBETWEEN_2", 0.5f);
+
+        CHUNKS.get("PIPE_2").tags.add(Tag.PIPE);
 
         CHUNKS.put("PIPE_INBETWEEN_1", new Chunk("""
             ----
@@ -293,6 +314,9 @@ public class ChunkReg {
         CHUNKS.get("PIPE_INBETWEEN_1").addWeight("PIT", 0.05f);
         CHUNKS.get("PIPE_INBETWEEN_1").addWeight("ENEMIES_1", 0.05f);
 
+        CHUNKS.get("PIPE_INBETWEEN_1").tags.add(Tag.ENEMY);
+        CHUNKS.get("PIPE_INBETWEEN_1").tags.add(Tag.GOOMBA);
+
         CHUNKS.put("PIPE_INBETWEEN_2", new Chunk("""
             ----
             ----
@@ -309,6 +333,10 @@ public class ChunkReg {
         CHUNKS.get("PIPE_INBETWEEN_2").addWeight("FOUR_QUESTION_BLOCKS", 0.05f);
         CHUNKS.get("PIPE_INBETWEEN_2").addWeight("PIT", 0.05f);
         CHUNKS.get("PIPE_INBETWEEN_2").addWeight("ENEMIES_1", 0.05f);
+
+        CHUNKS.get("PIPE_INBETWEEN_2").tags.add(Tag.ENEMY);
+        CHUNKS.get("PIPE_INBETWEEN_2").tags.add(Tag.KOOPA);
+        CHUNKS.get("PIPE_INBETWEEN_2").tags.add(Tag.GOOMBA);
 
         CHUNKS.put("START_HIGH_SECTION", new Chunk("""
             -------g----
@@ -327,6 +355,10 @@ public class ChunkReg {
         CHUNKS.get("START_HIGH_SECTION").addWeight("HIGH_SECTION_GAP", 0.4f);
         CHUNKS.get("START_HIGH_SECTION").addWeight("HIGH_SECTION_END", 0.2f);
 
+        CHUNKS.get("START_HIGH_SECTION").tags.add(Tag.ENEMY);
+        CHUNKS.get("START_HIGH_SECTION").tags.add(Tag.GOOMBA);
+        CHUNKS.get("START_HIGH_SECTION").tags.add(Tag.PIT);
+
         CHUNKS.put("HIGH_SECTION_ENEMY_PIT", new Chunk("""
             --k--------r
             SSSS-g-ggkSS
@@ -343,6 +375,11 @@ public class ChunkReg {
         CHUNKS.get("HIGH_SECTION_ENEMY_PIT").addWeight("HIGH_SECTION_GAP", 0.6f);
         CHUNKS.get("HIGH_SECTION_ENEMY_PIT").addWeight("HIGH_SECTION_END", 0.4f);
 
+        CHUNKS.get("HIGH_SECTION_ENEMY_PIT").tags.add(Tag.ENEMY);
+        CHUNKS.get("HIGH_SECTION_ENEMY_PIT").tags.add(Tag.GOOMBA);
+        CHUNKS.get("HIGH_SECTION_ENEMY_PIT").tags.add(Tag.KOOPA);
+        CHUNKS.get("HIGH_SECTION_ENEMY_PIT").tags.add(Tag.PIT);
+
         CHUNKS.put("HIGH_SECTION_GAP", new Chunk("""
             -----------g
             SS-----SSSSS
@@ -358,6 +395,10 @@ public class ChunkReg {
             """));
         CHUNKS.get("HIGH_SECTION_GAP").addWeight("HIGH_SECTION_GAP", 0.6f);
         CHUNKS.get("HIGH_SECTION_GAP").addWeight("HIGH_SECTION_END", 0.4f);
+
+        CHUNKS.get("HIGH_SECTION_GAP").tags.add(Tag.ENEMY);
+        CHUNKS.get("HIGH_SECTION_GAP").tags.add(Tag.GOOMBA);
+        CHUNKS.get("HIGH_SECTION_GAP").tags.add(Tag.PIT);
 
         CHUNKS.put("HIGH_SECTION_END", new Chunk("""
             ------------
@@ -378,11 +419,18 @@ public class ChunkReg {
         CHUNKS.get("HIGH_SECTION_END").addWeight("PIT", 0.2f);
         CHUNKS.get("HIGH_SECTION_END").addWeight("ENEMIES_1", 0.2f);
 
+        CHUNKS.get("HIGH_SECTION_END").tags.add(Tag.ENEMY);
+        CHUNKS.get("HIGH_SECTION_END").tags.add(Tag.KOOPA);
+        CHUNKS.get("HIGH_SECTION_END").tags.add(Tag.PIT);
+
         CHUNKS.put("MUSHROOM_1", new Chunk("""
             -%%%%-
             --||--
             --||--
             """));
+
+        CHUNKS.get("MUSHROOM_1").tags.add(Tag.MUSHROOM_BLOCKS);
+        CHUNKS.get("MUSHROOM_1").tags.add(Tag.PIT);
 
         CHUNKS.put("MUSHROOM_1_HARD", new Chunk("""
             ---g--
@@ -390,6 +438,11 @@ public class ChunkReg {
             --||--
             --||--
             """));
+
+        CHUNKS.get("MUSHROOM_1").tags.add(Tag.ENEMY);
+        CHUNKS.get("MUSHROOM_1").tags.add(Tag.GOOMBA);
+        CHUNKS.get("MUSHROOM_1").tags.add(Tag.MUSHROOM_BLOCKS);
+        CHUNKS.get("MUSHROOM_1").tags.add(Tag.PIT);
 
         CHUNKS.put("MUSHROOM_2", new Chunk("""
             ----ooor--
@@ -405,6 +458,11 @@ public class ChunkReg {
             --||||||--
             """));
 
+        CHUNKS.get("MUSHROOM_2").tags.add(Tag.ENEMY);
+        CHUNKS.get("MUSHROOM_2").tags.add(Tag.KOOPA);
+        CHUNKS.get("MUSHROOM_2").tags.add(Tag.MUSHROOM_BLOCKS);
+        CHUNKS.get("MUSHROOM_2").tags.add(Tag.PIT);
+
         CHUNKS.put("MUSHROOM_2_HARD", new Chunk("""
             ---rooo---
             --%%%%%---
@@ -419,6 +477,12 @@ public class ChunkReg {
             --||||||--
             """));
 
+        CHUNKS.get("MUSHROOM_2_HARD").tags.add(Tag.ENEMY);
+        CHUNKS.get("MUSHROOM_2_HARD").tags.add(Tag.GOOMBA);
+        CHUNKS.get("MUSHROOM_2_HARD").tags.add(Tag.KOOPA);
+        CHUNKS.get("MUSHROOM_2_HARD").tags.add(Tag.MUSHROOM_BLOCKS);
+        CHUNKS.get("MUSHROOM_2_HARD").tags.add(Tag.PIT);
+
         CHUNKS.put("MUSHROOM_3", new Chunk("""
             -----
             -----
@@ -432,6 +496,9 @@ public class ChunkReg {
             -|||-
             """));
 
+        CHUNKS.get("MUSHROOM_3").tags.add(Tag.MUSHROOM_BLOCKS);
+        CHUNKS.get("MUSHROOM_3").tags.add(Tag.PIT);
+
         CHUNKS.put("MUSHROOM_3_HARD", new Chunk("""
             ---g-
             %%%%%
@@ -442,6 +509,11 @@ public class ChunkReg {
             -|||-
             -|||-
             """));
+
+        CHUNKS.get("MUSHROOM_3_HARD").tags.add(Tag.ENEMY);
+        CHUNKS.get("MUSHROOM_3_HARD").tags.add(Tag.GOOMBA);
+        CHUNKS.get("MUSHROOM_3_HARD").tags.add(Tag.MUSHROOM_BLOCKS);
+        CHUNKS.get("MUSHROOM_3_HARD").tags.add(Tag.PIT);
 
         CHUNKS.put("MUSHROOM_4", new Chunk("""
             ----g-g
@@ -458,11 +530,19 @@ public class ChunkReg {
             -|||||-
             """));
 
+        CHUNKS.get("MUSHROOM_4").tags.add(Tag.ENEMY);
+        CHUNKS.get("MUSHROOM_4").tags.add(Tag.GOOMBA);
+        CHUNKS.get("MUSHROOM_4").tags.add(Tag.MUSHROOM_BLOCKS);
+        CHUNKS.get("MUSHROOM_4").tags.add(Tag.PIT);
+
         CHUNKS.put("MUSHROOM_5", new Chunk("""
             -%%%-
             --|--
             --|--
             """));
+
+        CHUNKS.get("MUSHROOM_5").tags.add(Tag.MUSHROOM_BLOCKS);
+        CHUNKS.get("MUSHROOM_5").tags.add(Tag.PIT);
 
         CHUNKS.put("MUSHROOM_5_HARD", new Chunk("""
             ---g-
@@ -470,6 +550,11 @@ public class ChunkReg {
             --|--
             --|--
             """));
+
+        CHUNKS.get("MUSHROOM_5_HARD").tags.add(Tag.ENEMY);
+        CHUNKS.get("MUSHROOM_5_HARD").tags.add(Tag.GOOMBA);
+        CHUNKS.get("MUSHROOM_5_HARD").tags.add(Tag.MUSHROOM_BLOCKS);
+        CHUNKS.get("MUSHROOM_5_HARD").tags.add(Tag.PIT);
 
         CHUNKS.put("MUSHROOM_6", new Chunk("""
             --oooo-
@@ -485,10 +570,16 @@ public class ChunkReg {
             --|||--
             """));
 
+        CHUNKS.get("MUSHROOM_6").tags.add(Tag.MUSHROOM_BLOCKS);
+        CHUNKS.get("MUSHROOM_6").tags.add(Tag.PIT);
+
         CHUNKS.put("MUSHROOM_7", new Chunk("""
             %%%%%-
             -|||--
             """));
+
+        CHUNKS.get("MUSHROOM_7").tags.add(Tag.MUSHROOM_BLOCKS);
+        CHUNKS.get("MUSHROOM_7").tags.add(Tag.PIT);
 
         CHUNKS.put("MUSHROOM_7_HARD", new Chunk("""
             --K---
@@ -500,6 +591,12 @@ public class ChunkReg {
             -|||--
             """));
 
+        CHUNKS.get("MUSHROOM_7").tags.add(Tag.ENEMY);
+        CHUNKS.get("MUSHROOM_7").tags.add(Tag.KOOPA);
+        CHUNKS.get("MUSHROOM_7").tags.add(Tag.MUSHROOM_BLOCKS);
+        CHUNKS.get("MUSHROOM_7").tags.add(Tag.PIT);
+        CHUNKS.get("MUSHROOM_7").tags.add(Tag.WINGED);
+
         CHUNKS.put("MUSHROOM_8", new Chunk("""
             %%%
             -|-
@@ -508,6 +605,9 @@ public class ChunkReg {
             -|-
             -|-
             """));
+
+        CHUNKS.get("MUSHROOM_8").tags.add(Tag.MUSHROOM_BLOCKS);
+        CHUNKS.get("MUSHROOM_8").tags.add(Tag.PIT);
 
         CHUNKS.put("MUSHROOM_9", new Chunk("""
             -----
@@ -522,6 +622,11 @@ public class ChunkReg {
             --|--
             """));
 
+        CHUNKS.get("MUSHROOM_9").tags.add(Tag.ENEMY);
+        CHUNKS.get("MUSHROOM_9").tags.add(Tag.KOOPA);
+        CHUNKS.get("MUSHROOM_9").tags.add(Tag.MUSHROOM_BLOCKS);
+        CHUNKS.get("MUSHROOM_9").tags.add(Tag.PIT);
+
         CHUNKS.put("MUSHROOM_10", new Chunk("""
             ---ooo-
             -------
@@ -534,6 +639,9 @@ public class ChunkReg {
             --|-|--
             --|-|--
             """));
+
+        CHUNKS.get("MUSHROOM_10").tags.add(Tag.MUSHROOM_BLOCKS);
+        CHUNKS.get("MUSHROOM_10").tags.add(Tag.PIT);
 
         CHUNKS.put("MUSHROOM_GAP_1", new Chunk("""
             -oo--
@@ -548,6 +656,8 @@ public class ChunkReg {
             -----
             """));
 
+        CHUNKS.get("MUSHROOM_GAP_1").tags.add(Tag.PIT);
+
         CHUNKS.put("MUSHROOM_GAP_2", new Chunk("""
             -------
             ---SS--
@@ -558,6 +668,8 @@ public class ChunkReg {
             -------
             """));
 
+        CHUNKS.get("MUSHROOM_GAP_2").tags.add(Tag.PIT);
+
         CHUNKS.put("MUSHROOM_GAP_2_HARD", new Chunk("""
             ---!---
             -------
@@ -567,6 +679,11 @@ public class ChunkReg {
             -------
             -------
             """));
+
+        CHUNKS.get("MUSHROOM_GAP_2_HARD").tags.add(Tag.ENEMY);
+        CHUNKS.get("MUSHROOM_GAP_2_HARD").tags.add(Tag.KOOPA);
+        CHUNKS.get("MUSHROOM_GAP_2_HARD").tags.add(Tag.WINGED);
+        CHUNKS.get("MUSHROOM_GAP_2_HARD").tags.add(Tag.PIT);
 
         CHUNKS.put("MUSHROOM_GAP_3", new Chunk("""
             -oooo-
@@ -580,6 +697,8 @@ public class ChunkReg {
             ------
             ------
             """));
+
+        CHUNKS.get("MUSHROOM_GAP_3").tags.add(Tag.PIT);
 
         // TODO: this is probably the worst thing ever right now
         for(int i = 0; i < 10; i++){
@@ -600,11 +719,11 @@ public class ChunkReg {
                         .addWeight("MUSHROOM_2", new SpecificChunkFactor("MUSHROOM_2", -0.2f, "LastX", 3))
                         .addWeight("MUSHROOM_2_HARD", new SpecificChunkFactor("MUSHROOM_2_HARD", -0.2f, "LastX", 3));
                 if (!Arrays.asList(7, 9).contains(i + 1)) {
-                    CHUNKS.get(key).addWeight("MUSHROOM_3", 1.0f).addWeight("MUSHROOM_3", new SpecificChunkFactor("MUSHROOM_3", -0.8f, "LastX", 3));;
+                    CHUNKS.get(key).addWeight("MUSHROOM_3", 1.0f).addWeight("MUSHROOM_3", new SpecificChunkFactor("MUSHROOM_3", -0.8f, "LastX", 3));
                     CHUNKS.get(key).addWeight("MUSHROOM_3_HARD", 0.25f); // TODO: factor in difficulty setting
                 }
                 if (!Arrays.asList(1, 5, 7, 9).contains(i + 1)) {
-                    CHUNKS.get(key).addWeight("MUSHROOM_4", 1.0f).addWeight("MUSHROOM_4", new SpecificChunkFactor("MUSHROOM_4", -0.8f, "LastX", 3));;
+                    CHUNKS.get(key).addWeight("MUSHROOM_4", 1.0f).addWeight("MUSHROOM_4", new SpecificChunkFactor("MUSHROOM_4", -0.8f, "LastX", 3));
                     CHUNKS.get(key).addWeight("MUSHROOM_5", 0.5f)
                             .addWeight("MUSHROOM_5", new SpecificChunkFactor("MUSHROOM_5", -0.8f, "LastX", 3))
                             .addWeight("MUSHROOM_5_HARD", new SpecificChunkFactor("MUSHROOM_5_HARD", -0.8f, "LastX", 3));
@@ -641,15 +760,15 @@ public class ChunkReg {
                 }
                 CHUNKS.get(key).addWeight("MUSHROOM_1", 1.0f).addWeight("MUSHROOM_1", new SpecificChunkFactor("MUSHROOM_1", -0.8f, "LastX", 3));
                 CHUNKS.get(key).addWeight("MUSHROOM_1_HARD", 0.25f); // TODO: factor in difficulty setting
-                CHUNKS.get(key).addWeight("MUSHROOM_2", 1.0f).addWeight("MUSHROOM_2", new SpecificChunkFactor("MUSHROOM_2", -0.8f, "LastX", 3));;
+                CHUNKS.get(key).addWeight("MUSHROOM_2", 1.0f).addWeight("MUSHROOM_2", new SpecificChunkFactor("MUSHROOM_2", -0.8f, "LastX", 3));
                 CHUNKS.get(key).addWeight("MUSHROOM_2_HARD", 0.25f); // TODO: factor in difficulty setting
 //                if (!Arrays.asList(7, 9).contains(i + 1)) {
-                    CHUNKS.get(key).addWeight("MUSHROOM_3", 1.0f).addWeight("MUSHROOM_3", new SpecificChunkFactor("MUSHROOM_3", -0.8f, "LastX", 3));;
+                    CHUNKS.get(key).addWeight("MUSHROOM_3", 1.0f).addWeight("MUSHROOM_3", new SpecificChunkFactor("MUSHROOM_3", -0.8f, "LastX", 3));
                     CHUNKS.get(key).addWeight("MUSHROOM_3_HARD", 0.25f); // TODO: factor in difficulty setting
 //                }
                 if (!Arrays.asList(2, 3).contains(i + 1)) {
-                    CHUNKS.get(key).addWeight("MUSHROOM_4", 1.0f).addWeight("MUSHROOM_4", new SpecificChunkFactor("MUSHROOM_4", -0.8f, "LastX", 3));;
-                    CHUNKS.get(key).addWeight("MUSHROOM_5", 1.0f).addWeight("MUSHROOM_5", new SpecificChunkFactor("MUSHROOM_5", -0.8f, "LastX", 3));;
+                    CHUNKS.get(key).addWeight("MUSHROOM_4", 1.0f).addWeight("MUSHROOM_4", new SpecificChunkFactor("MUSHROOM_4", -0.8f, "LastX", 3));
+                    CHUNKS.get(key).addWeight("MUSHROOM_5", 1.0f).addWeight("MUSHROOM_5", new SpecificChunkFactor("MUSHROOM_5", -0.8f, "LastX", 3));
                 }
                 CHUNKS.get(key).addWeight("MUSHROOM_6", 1.0f).addWeight("MUSHROOM_6", new SpecificChunkFactor("MUSHROOM_6", -0.8f, "LastX", 3));
                 CHUNKS.get(key).addWeight("MUSHROOM_7", 1.0f)
@@ -799,6 +918,8 @@ public class ChunkReg {
             """));
         CHUNKS.get("END_STAIRS").addWeight("END", 1.0f);
 
+        CHUNKS.get("END_STAIRS").tags.add(Tag.END_STAIRS);
+
         CHUNKS.put("END_STAIRS_HARD_1", new Chunk("""
             ---------k-------
             --------##-------
@@ -813,6 +934,8 @@ public class ChunkReg {
             XXXXXXXXXXXXXXXXX
             """));
         CHUNKS.get("END_STAIRS_HARD_1").addWeight("END", 1.0f);
+
+        CHUNKS.get("END_STAIRS_HARD_1").tags.add(Tag.END_STAIRS);
 
         CHUNKS.put("END_STAIRS_HARD_2", new Chunk("""
             -----------------
@@ -829,6 +952,8 @@ public class ChunkReg {
             """));
         CHUNKS.get("END_STAIRS_HARD_2").addWeight("END", 1.0f);
 
+        CHUNKS.get("END_STAIRS_HARD_2").tags.add(Tag.END_STAIRS);
+
         CHUNKS.put("END", new Chunk("""
             ----
             -F--
@@ -837,12 +962,15 @@ public class ChunkReg {
             XXXX
             """));
 
+        CHUNKS.get("END").tags.add(Tag.FLAG);
+
         CHUNKS.put("TEST_A", new Chunk(""));
-        CHUNKS.get("TEST_A").tags.add("TAG_A");
+        CHUNKS.get("TEST_A").tags.add(Tag.TAG_A);
         CHUNKS.put("TEST_B", new Chunk(""));
-        CHUNKS.get("TEST_B").tags.add("TAG_B");
+        CHUNKS.get("TEST_B").tags.add(Tag.TAG_B);
         CHUNKS.put("TEST_C", new Chunk(""));
-        CHUNKS.get("TEST_C").tags.add("TAG_C");
+        CHUNKS.get("TEST_C").tags.add(Tag.TAG_C);
+
     }
 
     /*boolean checkTag(String chunkName, String tag){

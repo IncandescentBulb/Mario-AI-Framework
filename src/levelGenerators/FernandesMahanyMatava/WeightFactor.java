@@ -157,7 +157,7 @@ class SpecificChunkFactor implements WeightFactor {
 }
 
 class SpecificTagFactor implements WeightFactor {
-    String tagName; //name of tag to look for
+    Tag tagName; //name of tag to look for
     float weight; // weight to apply if tag is found
     String within; // specifies a set of chunks to look at
 
@@ -176,14 +176,14 @@ class SpecificTagFactor implements WeightFactor {
      * */
     int X; // A value tied to some versions of this.within
 
-    SpecificTagFactor(String tagName, float weight) {// will function as PrevChunkFactor for tags
+    SpecificTagFactor(Tag tagName, float weight) {// will function as PrevChunkFactor for tags
         this.tagName = tagName;
         this.weight = weight;
         this.within = "Prior";
         this.X = -1;
     }
 
-    SpecificTagFactor(String tagName, float weight, String within) {// for non-X withins
+    SpecificTagFactor(Tag tagName, float weight, String within) {// for non-X withins
         /*if(!validWithin(within)){//
             //SHOULD return error, but not necessary for now
         }*/
@@ -198,7 +198,7 @@ class SpecificTagFactor implements WeightFactor {
 
     }
 
-    SpecificTagFactor(String tagName, float weight, String within, int X) {// for withins that use X
+    SpecificTagFactor(Tag tagName, float weight, String within, int X) {// for withins that use X
         /*if(!validWithin(within)){//
             //SHOULD return error, but not necessary for now
         }*/
@@ -272,7 +272,7 @@ class SpecificTagFactor implements WeightFactor {
         return 0.0f; //this factor was made invalid, should not affect weight
     }
 
-    boolean checkTag(String chunkName, String tag){
+    boolean checkTag(String chunkName, Tag tag){
         if (ChunkReg.CHUNKS.containsKey(chunkName)){//if chunk exists
             return ChunkReg.CHUNKS.get(chunkName).hasTag(tag);
         }
@@ -282,26 +282,26 @@ class SpecificTagFactor implements WeightFactor {
 }
 
 class TotalTagFactor implements WeightFactor{
-    String tag;
+    Tag tag;
     int limit;
     float weight;
     boolean lessThan = false;
     boolean multiply = false;
 
-    TotalTagFactor(String tag, float weight, int limit){
+    TotalTagFactor(Tag tag, float weight, int limit){
         this.tag = tag;
         this.weight = weight;
         this.limit = limit;
     }
 
-    TotalTagFactor(String tag, float weight, int limit, boolean lessThan){
+    TotalTagFactor(Tag tag, float weight, int limit, boolean lessThan){
         this.tag = tag;
         this.weight = weight;
         this.limit = limit;
         this.lessThan = lessThan;
     }
 
-    TotalTagFactor(String tag, float weight, int limit, String option){
+    TotalTagFactor(Tag tag, float weight, int limit, String option){
         this.tag = tag;
         this.weight = weight;
         this.limit = limit;
@@ -329,7 +329,7 @@ class TotalTagFactor implements WeightFactor{
         return 0.0f;
     }
 
-    boolean checkTag(String chunkName, String tag){
+    boolean checkTag(String chunkName, Tag tag){
         if (ChunkReg.CHUNKS.containsKey(chunkName)){//if chunk exists
             return ChunkReg.CHUNKS.get(chunkName).hasTag(tag);
         }

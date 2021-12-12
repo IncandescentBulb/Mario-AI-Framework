@@ -4,6 +4,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+enum Tag {
+    ENEMY, // has an enemy of some kind (Goomba, Koopa, etc.)
+    GOOMBA, // has one or more Goombas
+    KOOPA,
+    //PIRANHA,
+    //SPIKY,
+    //BULLET, // Bullet Bill or Bill Blaster
+    WINGED, // any winged enemy
+    PIPE, // has pipe tiles
+    PIT, // can fall out of this tile
+    //SUPER, // has super mushroom
+    MUSHROOM_BLOCKS, // mushroom tiles
+    START, // has spawn for Mario (M)
+    END_STAIRS, // stairs that lead to flag
+    FLAG, // has flag
+    TAG_A, // "TAG_..." tags are for use testing WeightFactors and such
+    TAG_B,
+    TAG_C,
+    TAG_D,
+}
+
 public class Chunk {
     String tiles;
 
@@ -12,7 +33,7 @@ public class Chunk {
      * The WeightFactors are summed to calculate the total weight for that next chunk
      */
     HashMap<String, List<WeightFactor>> weights;
-    List<String> tags;
+    List<Tag> tags;
 
     Chunk(String tiles) {
         this.tiles = tiles;
@@ -36,13 +57,13 @@ public class Chunk {
         return calc;
     }
 
-    void addTag(String tag){
+    void addTag(Tag tag){
         //if(!tags.contains(tag)) {
         tags.add(tag);
         //}
     }
 
-    boolean hasTag(String tag){
+    boolean hasTag(Tag tag){
         return tags.contains(tag);
     }
 
