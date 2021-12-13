@@ -229,7 +229,7 @@ public class ChunkReg {
         CHUNKS.get("PIT").addWeight("ENEMIES_1", 0.25f);
         CHUNKS.get("PIT").addWeight("PIPE_2", 0.1f);
 
-        CHUNKS.get("Pit").tags.add(Tag.PIT);
+        CHUNKS.get("PIT").tags.add(Tag.PIT);
 
         CHUNKS.put("ENEMIES_1", new Chunk("""
             -r-g-g-
