@@ -6,6 +6,7 @@ import engine.core.MarioTimer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 
 public class LevelGenerator implements MarioLevelGenerator {
@@ -14,10 +15,14 @@ public class LevelGenerator implements MarioLevelGenerator {
      * List of chunks in the level so far.
      */
     List<String> chunks;
-
+    Hashtable<String, Integer> parameters;
     /**
      * Add a random chunk to the chunks List, based on the weight map of the previous chunk
      */
+    public void setParameters(Hashtable<String, Integer> param){
+        parameters = param;
+    }
+
     void nextChunk() {
 
         String lastChunk = chunks.get(chunks.size() - 1);
@@ -67,7 +72,7 @@ public class LevelGenerator implements MarioLevelGenerator {
         float minSize = 15;
         float maxSize = 18;
 
-        float minSizeTiles = 85;
+        float minSizeTiles = parameters.get("min-width");
         float maxSizeTiles = model.getWidth()-5;
         int map_length = ChunkReg.CHUNKS.get(this.chunks.get(0)).getWidth();
         while(!this.chunks.get(this.chunks.size() - 1).equals("END")) {

@@ -2,7 +2,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
-
+import java.io.FileWriter;   // Import the FileWriter class
+import java.io.IOException;  // Import the IOException class to handle errors
 import engine.core.*;
 
 public class PlayLevel {
@@ -37,6 +38,16 @@ public class PlayLevel {
         Scanner sc = new Scanner(System.in);
         boolean fullExit = false;
         MarioGame game = new MarioGame();
+        try {
+            FileWriter myWriter = new FileWriter("generated_levels.txt");
+            myWriter.write("Files in Java might be tricky, but it is fun enough! badfasfsdf");
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
 
         while(!fullExit) {
             game.first = true;
