@@ -345,6 +345,7 @@ class MultiFactor implements WeightFactor{
         First, // the first factor result that isn't zero
         Max, //highest result (that isn't zero)
         Min, //lowest result (that isn't zero)
+        Gate, // if first is not zero, return sum of rest
     }
     MFOption option;
     MultiFactor(MFOption option){
@@ -392,6 +393,18 @@ class MultiFactor implements WeightFactor{
                     }
                 }
                 return g;
+            }
+            case Gate -> {
+                f = factors.get(0).getWeight(gen);
+                if (f != 0.0f){
+                    f = 0.0f;
+                    for (i = 1; i < l; i++) {
+                        f += factors.get(i).getWeight(gen);
+                    }
+                    return f;
+                }
+                return 0.0f;
+
             }
             default -> {
             }
