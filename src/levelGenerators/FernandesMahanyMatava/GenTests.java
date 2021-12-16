@@ -3,6 +3,7 @@ package levelGenerators.FernandesMahanyMatava;
 import engine.core.MarioLevelGenerator;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class GenTests {
     public static void main(String[] args) {
@@ -186,6 +187,34 @@ public class GenTests {
         w = ttfLessBNot.getWeight(gen2);
         System.out.println("ttfLessBNot test (0.0): returns " + w);
         */
+        Hashtable<String, Integer> ht1 = new Hashtable<String, Integer>();
+        ht1.put("One", 1);
+        ht1.put("Two", 2);
+        ht1.put("Zero", 0);
+        ht1.put("-One", -1);
+        gen2.setParameters(ht1);
+
+        System.out.println("PMF Tests");
+
+        WeightFactor pmfOne = new ParamMultFactor("One", 3.2f);
+        w = pmfOne.getWeight(gen2);
+        System.out.println("pmfOne test (3.2): returns " + w);
+
+        WeightFactor pmfTwo = new ParamMultFactor("Two", 1.6f);
+        w = pmfTwo.getWeight(gen2);
+        System.out.println("pmfTwo test (3.2): returns " + w);
+
+        WeightFactor pmfNegOne = new ParamMultFactor("-One", -3.2f);
+        w = pmfNegOne.getWeight(gen2);
+        System.out.println("pmfNegOne test (3.2): returns " + w);
+
+        WeightFactor pmfNot = new ParamMultFactor("Not", -1.0f);
+        w = pmfNot.getWeight(gen2);
+        System.out.println("pmfNot test (0): returns " + w);
+
+        WeightFactor pmfZero = new ParamMultFactor("Zero", -1.0f);
+        w = pmfZero.getWeight(gen2);
+        System.out.println("pmfZero test (0): returns " + w);
         System.out.println("End of GenTests");
     }
 }
