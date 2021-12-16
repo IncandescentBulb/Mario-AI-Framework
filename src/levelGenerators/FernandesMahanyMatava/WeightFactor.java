@@ -399,3 +399,21 @@ class MultiFactor implements WeightFactor{
         return 0.0f;
     }
 }
+
+class ParamMultFactor implements WeightFactor {
+    String param;
+    Float weight;
+    ParamMultFactor(String param, Float weight){
+        this.param = param;
+        this.weight = weight;
+    }
+    @Override
+    public float getWeight(LevelGenerator gen){
+        //get param value from table
+        if (!gen.parameters.containsKey(param)){
+            return 0.0f;
+        }
+        Float value = (float) gen.parameters.get(param);
+        return (value * weight);
+    }
+}
