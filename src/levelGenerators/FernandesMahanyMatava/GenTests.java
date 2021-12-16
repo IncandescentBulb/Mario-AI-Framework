@@ -195,7 +195,7 @@ public class GenTests {
         gen2.setParameters(ht1);
 
         System.out.println("PMF Tests");
-
+        /*
         WeightFactor pmfOne = new ParamMultFactor("One", 3.2f);
         w = pmfOne.getWeight(gen2);
         System.out.println("pmfOne test (3.2): returns " + w);
@@ -215,6 +215,33 @@ public class GenTests {
         WeightFactor pmfZero = new ParamMultFactor("Zero", -1.0f);
         w = pmfZero.getWeight(gen2);
         System.out.println("pmfZero test (0): returns " + w);
+        */
+        System.out.println("PCF Tests");
+
+        WeightFactor pcfEqual = new ParamCompFactor("One", "Equal", 1, 3.3f);
+        w = pcfEqual.getWeight(gen2);
+        System.out.println("pcfEqual test (3.3): returns " + w);
+
+        WeightFactor pcfAtLeastA = new ParamCompFactor("One", "At Least", 1, 3.3f);
+        w = pcfAtLeastA.getWeight(gen2);
+        System.out.println("pcfAtLeastA test (3.3): returns " + w);
+
+        WeightFactor pcfAtLeastB = new ParamCompFactor("Two", "At Least", 1, 3.3f);
+        w = pcfAtLeastB.getWeight(gen2);
+        System.out.println("pcfAtLeastB test (3.3): returns " + w);
+
+        WeightFactor pcfLess = new ParamCompFactor("Zero", "Less", 1, 3.3f);
+        w = pcfLess.getWeight(gen2);
+        System.out.println("pcfLess test (3.3): returns " + w);
+
+        WeightFactor pcfWithout = new ParamCompFactor("Not", "At Least", 1, 3.3f, true);
+        w = pcfWithout.getWeight(gen2);
+        System.out.println("pcfWithout test (3.3): returns " + w);
+
+        WeightFactor pcfNot = new ParamCompFactor("Not", "At Least", 1, 3.3f);
+        w = pcfNot.getWeight(gen2);
+        System.out.println("pcfNot test (0): returns " + w);
+
         System.out.println("End of GenTests");
     }
 }

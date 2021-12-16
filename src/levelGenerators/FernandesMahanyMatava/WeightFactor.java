@@ -430,3 +430,57 @@ class ParamMultFactor implements WeightFactor {
         return (value * weight);
     }
 }
+
+class ParamCompFactor implements WeightFactor{
+    String comp, param;
+    Integer i;
+    Float weight;
+    float without;
+    ParamCompFactor(String param, String comp, Integer i, Float weight){
+        this.param = param;
+        this.comp = comp;
+        this.weight = weight;
+        this.i = i;
+        this.without = 0.0f;
+    }
+    ParamCompFactor(String param, String comp, Integer i, Float weight, boolean without){
+        this.param = param;
+        this.comp = comp;
+        this.weight = weight;
+        this.i = i;
+        if(without){
+            this.without = weight;
+        } else {
+            this.without = 0.0f;
+        }
+    }
+    @Override
+    public float getWeight(LevelGenerator gen){
+        if (!gen.parameters.containsKey(param)){
+            return without;
+        }
+        Integer value = gen.parameters.get(param);
+        switch (comp) {
+            case "Equal" -> {
+                if (value == i){
+                    return weight;
+                }
+            }
+            case "At Least" -> {
+                if (value >= i){
+                    return weight;
+                }
+            }
+            case "Less" -> {
+                if (value < i){
+                    return weight;
+                }
+            }
+            default -> {
+                return 0.0f;
+            }
+        }
+        return 0.0f;
+    }
+
+}
