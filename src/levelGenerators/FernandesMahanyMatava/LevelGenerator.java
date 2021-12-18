@@ -16,6 +16,7 @@ public class LevelGenerator implements MarioLevelGenerator {
      */
     List<String> chunks;
     Hashtable<String, Integer> parameters;
+
     /**
      * Add a random chunk to the chunks List, based on the weight map of the previous chunk
      */
@@ -27,6 +28,7 @@ public class LevelGenerator implements MarioLevelGenerator {
 
         String lastChunk = chunks.get(chunks.size() - 1);
         HashMap<String, Float> nextWeights = ChunkReg.CHUNKS.get(lastChunk).calculateWeights(this);
+        System.out.println(nextWeights);
 
         float sumOfWeights = nextWeights.values().stream().reduce(Float::sum).get();
 
@@ -63,7 +65,7 @@ public class LevelGenerator implements MarioLevelGenerator {
 
         // set to "START" for non-mushroom level
         // set to "MUSHROOM_7" for mushroom level
-        this.chunks.add("MUSHROOM_7");
+        this.chunks.add(parameters.getOrDefault("theme", 0).equals(1) ? "MUSHROOM_7" : "START");
 
         // keep adding chunks until it generates an END chunk
         // TODO: maybe should add a length limit here in case it gets stuck in a loop
@@ -72,7 +74,7 @@ public class LevelGenerator implements MarioLevelGenerator {
         float minSize = 15;
         float maxSize = 18;
 
-        float minSizeTiles = parameters.get("min-width");
+        float minSizeTiles = parameters.getOrDefault("min-width", 80);
         float maxSizeTiles = model.getWidth()-5;
         int map_length = ChunkReg.CHUNKS.get(this.chunks.get(0)).getWidth();
         while(!this.chunks.get(this.chunks.size() - 1).equals("END")) {

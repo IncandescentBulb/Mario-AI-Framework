@@ -51,7 +51,7 @@ public class Chunk {
 
         this.weights.forEach((k, weightFactors) -> {
             float v = (float)weightFactors.stream().mapToDouble(wf -> wf.getWeight(generator)).sum();
-            calc.put(k, v);
+            calc.put(k, Math.max(v, 0.0f));
         });
 
         return calc;
