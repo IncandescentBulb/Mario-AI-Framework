@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import static java.lang.Math.*;
 import java.io.FileWriter;   // Import the FileWriter class
 import java.io.IOException;  // Import the IOException class to handle errors
 import engine.core.*;
@@ -38,11 +39,12 @@ public class PlayLevel {
         Scanner sc = new Scanner(System.in);
         boolean fullExit = false;
         MarioGame game = new MarioGame();
+        FileWriter myWriter = null;
         try {
-            FileWriter myWriter = new FileWriter("generated_levels.txt");
-            myWriter.write("Files in Java might be tricky, but it is fun enough! badfasfsdf");
-            myWriter.close();
-            System.out.println("Successfully wrote to the file.");
+            myWriter = new FileWriter("generated_levels.txt");
+            //myWriter.write("Files in Java might be tricky, but it is fun enough! badfasfsdf");
+
+            System.out.println();//"Successfully wrote to the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -50,33 +52,157 @@ public class PlayLevel {
 
 
         while(!fullExit) {
+            Hashtable<String, Integer> parameters
+                    = new Hashtable<String, Integer>();
+            parameters.put("min-width", 85);
+            parameters.put("max-width", 150);
+            parameters.put("difficulty", 1);
+            parameters.put("theme", 0);
+            //numbers.put("two", 2);
+            //numbers.put("three", 3);
+            //int width = 150;
+            //int paramLength = 1;
             game.first = true;
             boolean hasLine = false;
-            System.out.print("Enter a string: ");
-            do {
+            boolean skip = false;
+            System.out.println("Enter a string. Enter \"exit\" to exit. Press Enter without input to use default values for the remaining parameters: ");
+            Set<String> parametersKeys = parameters.keySet();
+            Iterator<String> itr = parametersKeys.iterator();
+            String param = "";
 
-
-                if(sc.hasNextLine()) {
-                    //System.out.println("l;kjasdf");
-                    hasLine = true;
-                    String str = sc.nextLine();              //reads string
-
-                    //sc.close();
-                    if (str == "") {
-                        System.out.print("Exiting");
-                        fullExit = true;
-                        break;
-                    }else{
-                        System.out.print("You have entered: " + str);
-                    }
-                }else{
-
+           /* if(itr.hasNext()){
+                param = itr.next();
+            }*/
+            boolean invalidInput = false;
+            while(itr.hasNext()) {
+                if(fullExit || skip){
+                    break;
+                }else if(!invalidInput){
+                    param = itr.next();
+                    invalidInput = false;
                 }
 
-            }while(!hasLine);
+                //prompt user for each parameter, give ranges/options for values
+                switch(param){
+                    case "min-width":
+
+                        System.out.print("Min level length (between 60 and 340, default 85): ");
+                        break;
+                    case "max-width":
+                        int max = (int) Math.floor(parameters.get("min-width")*1.8);
+                        if (max>400){
+                            max = 400;
+                        }
+                        System.out.print("Max level length (between " + parameters.get("min-width") + " and 400, default " + max + "): ");
+                        break;
+                    case "difficulty":
+                        System.out.print("Difficulty (between 0 and 3, default 1): ");
+                        break;
+                    case "theme":
+                        System.out.print("Level theme (0: default, 1: mushroom, 2: pipes): ");
+                        break;
+                    default:
+                        System.out.println("uh oh");
+                }
+
+                do {
+                    if (sc.hasNextLine()) {
+                        //System.out.println("l;kjasdf");
+                        hasLine = true;
+                        String str = sc.nextLine();              //reads string
+
+                        //sc.close();
+                        if (str == "exit") {
+                            System.out.print("Exiting");
+                            //i = paramLength;
+                            fullExit = true;
+                            break;
+                        } else if (str == "") {
+                            System.out.println("using defaults for remaining parameters");
+                            skip = true;
+                            if(parameters.get("min-width")>= parameters.get("max-width")){
+                                int max = (int) Math.floor(parameters.get("min-width")*1.8);
+                                if (max>400){
+                                    max = 400;
+                                }
+                                parameters.replace("max-width", max);
+                            }
+                            //i = paramLength;
+                            break;
+                        }else {
+                            int temp = 0;
+                            //System.out.print("You have entered: " + str);
+                            try{
+                                temp = Integer.parseInt(str);
+                            }catch(NumberFormatException e){
+                                System.out.println("invalid input");
+                                invalidInput = true;
+                                //i--;
+                                break;
+                            }
+
+                            switch(param){
+                                case "min-width":
+                                    if(temp >= 60 && temp <=340){
+                                        parameters.replace("min-width", temp);
+                                    }else{
+                                        System.out.println("invalid number");
+                                        //i--;
+                                        invalidInput = true;
+                                        break;
+                                    }
+                                    break;
+                                case "max-width":
+                                    if(temp >= parameters.get("min-width") && temp <=400){
+                                        parameters.replace("max-width", temp);
+                                    }else{
+                                        System.out.println("invalid number");
+                                        //i--;
+                                        invalidInput = true;
+                                        break;
+                                    }
+                                    break;
+                                case "difficulty":
+                                    if(temp >= 0 && temp <=3){
+                                        parameters.replace(param, temp);
+                                    }else{
+                                        System.out.println("invalid number");
+                                        //i--;
+                                        invalidInput = true;
+                                        break;
+                                    }
+                                    //System.out.print("Difficulty (between 0 and 5, default 2): ");
+                                    break;
+                                case "theme":
+                                    //System.out.print("Level theme (0 or 1, default 0): ");
+                                    if(temp >= 0 && temp <=2){
+                                        parameters.replace(param, temp);
+                                    }else{
+                                        System.out.println("invalid number");
+                                        //i--;
+                                        invalidInput = true;
+                                        break;
+                                    }
+                                    break;
+                                default:
+                                    System.out.println("uh oh");
+                            }
+                            if(invalidInput){
+                                break;
+                            }
+                        }
+                        //check values of str, parameters. need to check against possible values.
+                    } else {
+                        System.out.println("abababababa;lkjbkl");
+                    }
+
+                } while (!hasLine);
+
+            }
             if(fullExit){
                 break;
             }
+            //System.out.println("Max level width: " + width);
 
             boolean exited = false;
             ///*
@@ -84,6 +210,8 @@ public class PlayLevel {
             //game.pause = true;
             game.addKey();
             MarioLevelGenerator generator = new levelGenerators.FernandesMahanyMatava.LevelGenerator();
+            levelGenerators.FernandesMahanyMatava.LevelGenerator gen = (levelGenerators.FernandesMahanyMatava.LevelGenerator)generator;
+            gen.setParameters(parameters);
             //*/
             while (!exited) {
 
@@ -95,8 +223,17 @@ public class PlayLevel {
                 //MarioLevelGenerator generator = new levelGenerators.FernandesMahanyMatava1.LevelGenerator();
 
 
-                String level = generator.getGeneratedLevel(new MarioLevelModel(150, 16), new MarioTimer(5 * 60 * 60 * 1000));
-
+                String level = generator.getGeneratedLevel(new MarioLevelModel(parameters.get("max-width")+20, 16), new MarioTimer(5 * 60 * 60 * 1000));
+                if(myWriter != null) {
+                    try {
+                        myWriter.write(level + "\n\n\n\n");
+                    } catch (IOException e) {
+                        System.out.println("An error occurred trying to write level to file.");
+                        e.printStackTrace();
+                    }
+                }else{
+                    System.out.println("myWriter is null");
+                }
 
                 //System.out.println(game.pause);
                 //String level = getLevel("./levels/original/lvl-1.txt");//, 200, 0));
@@ -137,6 +274,15 @@ public class PlayLevel {
                     System.out.println("KLjlkj");
                 }
                 System.out.println("flag2");*/
+            }
+        }
+        sc.close();
+        if(myWriter != null) {
+            try {
+                myWriter.close();
+            } catch (IOException e) {
+                System.out.println("An error occurred trying to close writer.");
+                e.printStackTrace();
             }
         }
     }
