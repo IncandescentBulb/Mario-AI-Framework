@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * A weight that can change depending on the state of the `LevelGenerator`
+ */
 interface WeightFactor {
     float getWeight(LevelGenerator generator);
 }
@@ -156,6 +159,9 @@ class SpecificChunkFactor implements WeightFactor {
 
 }
 
+/**
+ * Applies a weight if a chunk with a specific tag is within a certain section of the level
+ */
 class SpecificTagFactor implements WeightFactor {
     Tag tagName; //name of tag to look for
     float weight; // weight to apply if tag is found
@@ -281,7 +287,10 @@ class SpecificTagFactor implements WeightFactor {
 
 }
 
-class TotalTagFactor implements WeightFactor{
+/**
+ * Applies a weight if the number of chunks with a tag is above or below a set value.
+ */
+class TotalTagFactor implements WeightFactor {
     Tag tag;
     int limit;
     float weight;
@@ -338,7 +347,10 @@ class TotalTagFactor implements WeightFactor{
 
 }
 
-class MultiFactor implements WeightFactor{
+/**
+ * Combines a set of factors in special ways.
+ */
+class MultiFactor implements WeightFactor {
     List<WeightFactor> factors;
     float offset;
     enum MFOption{
@@ -413,6 +425,9 @@ class MultiFactor implements WeightFactor{
     }
 }
 
+/**
+ * Applies a weight multiplied by the value of a given parameter.
+ */
 class ParamMultFactor implements WeightFactor {
     String param;
     Float weight;
@@ -431,6 +446,9 @@ class ParamMultFactor implements WeightFactor {
     }
 }
 
+/**
+ * Applies a weight depending on the condition on a given parameter.
+ */
 class ParamCompFactor implements WeightFactor{
     String comp, param;
     Integer i;

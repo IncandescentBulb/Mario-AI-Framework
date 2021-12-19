@@ -15,15 +15,19 @@ public class LevelGenerator implements MarioLevelGenerator {
      * List of chunks in the level so far.
      */
     List<String> chunks;
+
     Hashtable<String, Integer> parameters;
 
     /**
-     * Add a random chunk to the chunks List, based on the weight map of the previous chunk
+     * Set the input parameters.
      */
     public void setParameters(Hashtable<String, Integer> param){
         parameters = param;
     }
 
+    /**
+     * Add a random chunk to the chunks List, based on the weight map of the previous chunk
+     */
     void nextChunk() {
 
         String lastChunk = chunks.get(chunks.size() - 1);

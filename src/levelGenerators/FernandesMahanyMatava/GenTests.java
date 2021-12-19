@@ -245,16 +245,3 @@ public class GenTests {
         System.out.println("End of GenTests");
     }
 }
-/*
-class SimpleFactor implements WeightFactor{
-    float held = -1.0f;
-
-    SimpleFactor(float toHold){
-        held = toHold;
-    }
-
-    @Override
-    public float getWeight(LevelGenerator generator) {
-        return(held);
-    }
-}*/

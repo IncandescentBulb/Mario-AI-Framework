@@ -3,128 +3,10 @@ package levelGenerators.FernandesMahanyMatava;
 import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+ * Container that holds all of the Chunks
+ */
 public class ChunkReg {
-
-
-    /// old unused Chunk data
-    /// each row is assumed to be the same width
-    /// chunks are aligned by the bottom row if they have different heights
-
-    // TODO: add these into the new Chunk system
-
-    static String BLANK =
-            "----" + "\n" +
-            "----" + "\n" +
-            "----" + "\n" +
-            "----";
-
-    static String COIN_BOX=
-            "!S" + "\n" +
-            "--" + "\n" +
-            "--" + "\n" +
-            "XX" + "\n" +
-            "XX";
-
-    static String PIPE_1 =
-            "----" + "\n" +
-            "----" + "\n" +
-            "-tt-" + "\n" +
-            "XXXX" + "\n" +
-            "XXXX";
-
-    static String PIPE_6 =
-            "-tt-" + "\n" +
-            "-tt-" + "\n" +
-            "-tt-" + "\n" +
-            "-tt-" + "\n" +
-            "-tt-" + "\n" +
-            "-tt-" + "\n" +
-            "XXXX" + "\n" +
-            "XXXX";
-
-    static String PYRAMID_FLOOR =
-            "---#--#---" + "\n" +
-            "--##--##--" + "\n" +
-            "-###--###-" + "\n" +
-            "####--####" + "\n" +
-            "XXXXXXXXXX" + "\n" +
-            "XXXXXXXXXX";
-
-    static String PYRAMID_PIT =
-            "---##--#---" + "\n" +
-            "--###--##--" + "\n" +
-            "-####--###-" + "\n" +
-            "#####--####" + "\n" +
-            "XXXXX--XXXX" + "\n" +
-            "XXXXX--XXXX";
-
-    static String RAISED_START =
-            "-------\n" +
-            "-------\n" +
-            "-----SS\n" +
-            "-----SS\n" +
-            "XX---XX\n" +
-            "XX---XX";
-
-    static String RAISED_ENEMIES_1 =
-            "------\n" +
-            "-r-gg-\n" +
-            "SSSSSS\n" +
-            "SSSSSS\n" +
-            "XXXXXX\n" +
-            "XXXXXX";
-
-    static String RAISED_ENEMIES_2 =
-            "------\n" +
-            "-g--k-\n" +
-            "SSSSSS\n" +
-            "SSSSSS\n" +
-            "XXXXXX\n" +
-            "XXXXXX";
-
-    static String RAISED_BRICKS_1 =
-            "---@--\n" +
-            "------\n" +
-            "------\n" +
-            "------\n" +
-            "--SSS-\n" +
-            "------\n" +
-            "------\n" +
-            "------\n" +
-            "SSSSSS\n" +
-            "SSSSSS\n" +
-            "XXXXXX\n" +
-            "XXXXXX";
-
-    static String RAISED_BRICKS_2 =
-            "-----g----\n" +
-            "----SSS---\n" +
-            "----------\n" +
-            "----k-----\n" +
-            "--SCS-@---\n" +
-            "----------\n" +
-            "----------\n" +
-            "-------g--\n" +
-            "SSSSSSSSSS\n" +
-            "SSSSSSSSSS\n" +
-            "XXXXXXXXXX\n" +
-            "XXXXXXXXXX";
-
-    static String RAISED_PIT =
-            "------\n" +
-            "------\n" +
-            "SS---S\n" +
-            "SS---S\n" +
-            "XX---X\n" +
-            "XX---X";
-
-    static String RAISED_END =
-            "------\n" +
-            "-g----\n" +
-            "SSSS--\n" +
-            "SSSSS-\n" +
-            "XXXXXX\n" +
-            "XXXXXX";
 
     static final HashMap<String, Chunk> CHUNKS;
 
@@ -1052,18 +934,4 @@ public class ChunkReg {
 
     }
 
-    /*boolean checkTag(String chunkName, String tag){
-        if (CHUNKS.containsKey(chunkName)){//if chunk exists
-            return CHUNKS.get(chunkName).hasTag(tag);
-        }
-        return false;
-    }*/
-
 }
-
-    /*boolean checkTag(String chunkName, String tag){
-        if (ChunkReg.CHUNKS.containsKey(chunkName)){//if chunk exists
-            return ChunkReg.CHUNKS.get(chunkName).hasTag(tag);
-        }
-        return false;
-    }*/
